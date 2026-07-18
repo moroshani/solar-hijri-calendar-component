@@ -1,5 +1,6 @@
 import { useMemo, useState, type ReactNode } from "react";
 import { addMonths, buildCalendarDays, getToday, isSameDate } from "./calendarMath";
+import { createDateDisabledMatcher } from "./constraints";
 import { formatDay, formatMonthTitle, getWeekdayLabels } from "./labels";
 import { createRangePreview, isDateInRange, selectRangeDate, type RangeSelectionOptions } from "./selection";
 import type { CalendarDayState, CalendarLocale, SolarHijriDate, SolarHijriMonth, SolarHijriRange, WeekStart } from "./types";
@@ -11,6 +12,8 @@ export type SolarHijriRangeCalendarProps = {
   onMonthChange?: (month: SolarHijriMonth) => void;
   locale?: CalendarLocale;
   weekStartsOn?: WeekStart;
+  minDate?: SolarHijriDate;
+  maxDate?: SolarHijriDate;
   isDateDisabled?: (date: SolarHijriDate) => boolean;
   className?: string;
   previousLabel?: string;
@@ -32,6 +35,8 @@ export function SolarHijriRangeCalendar({
   onMonthChange,
   locale = "fa",
   weekStartsOn = "saturday",
+  minDate,
+  maxDate,
   isDateDisabled,
   className,
   previousLabel,
@@ -53,17 +58,20 @@ export function SolarHijriRangeCalendar({
   const visibleMonth = month ?? internalMonth;
   const direction = locale === "fa" ? "rtl" : "ltr";
   const weekdayLabels = getWeekdayLabels(locale, weekStartsOn);
+  const disabledMatcher = useMemo(() => {
+    return createDateDisabledMatcher({ minDate, maxDate, isDateDisabled });
+  }, [isDateDisabled, maxDate, minDate]);
   const rangePreview = createRangePreview(activeRange, hoveredDate);
   const rangeSelectionOptions: RangeSelectionOptions = {
     allowSameDay,
-    disabled: isDateDisabled,
+    disabled: disabledMatcher,
     excludeDisabled,
     minDays,
     maxDays,
   };
 
   const days = useMemo(() => {
-    return buildCalendarDays(visibleMonth, null, isDateDisabled, weekStartsOn).map((day): CalendarDayState => {
+    return buildCalendarDays(visibleMonth, null, disabledMatcher, weekStartsOn).map((day): CalendarDayState => {
       const isRangeStart = Boolean(activeRange.from && isSameDate(day, activeRange.from));
       const isRangeEnd = Boolean(activeRange.to && isSameDate(day, activeRange.to));
       const isInRange = isDateInRange(day, activeRange, { excludeEnds: true });
@@ -78,7 +86,7 @@ export function SolarHijriRangeCalendar({
         isRangePreview,
       };
     });
-  }, [activeRange, isDateDisabled, rangePreview, visibleMonth, weekStartsOn]);
+  }, [activeRange, disabledMatcher, rangePreview, visibleMonth, weekStartsOn]);
 
   const setVisibleMonth = (nextMonth: SolarHijriMonth) => {
     if (!month) setInternalMonth(nextMonth);
@@ -160,4 +168,3 @@ export function SolarHijriRangeCalendar({
     </section>
   );
 }
-

@@ -1,4 +1,13 @@
-export type { CalendarDay, CalendarDayState, CalendarLocale, SolarHijriDate, SolarHijriMonth, SolarHijriRange, WeekStart } from "./types";
+export type {
+  CalendarDay,
+  CalendarDayState,
+  CalendarLocale,
+  SolarHijriDate,
+  SolarHijriMonth,
+  SolarHijriRange,
+  SolarHijriSelectionMode,
+  WeekStart,
+} from "./types";
 export {
   addDays,
   addMonths,
@@ -15,6 +24,8 @@ export {
   toGregorianDate,
   toIsoDate,
 } from "./calendarMath";
+export { createDateDisabledMatcher, isDateOutsideBounds, isDateUnavailable } from "./constraints";
+export type { DateBounds, DateConstraintOptions } from "./constraints";
 export { formatDay, formatMonthTitle, getWeekdayLabels, monthNames } from "./labels";
 export {
   createRangePreview,

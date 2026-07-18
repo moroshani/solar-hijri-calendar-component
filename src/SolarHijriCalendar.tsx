@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import { addMonths, buildCalendarDays, getToday } from "./calendarMath";
+import { createDateDisabledMatcher } from "./constraints";
 import { formatDay, formatMonthTitle, getWeekdayLabels } from "./labels";
 import type { CalendarDay, CalendarLocale, SolarHijriDate, SolarHijriMonth, WeekStart } from "./types";
 import type { ReactNode } from "react";
@@ -12,6 +13,8 @@ export type SolarHijriCalendarProps = {
   onMonthChange?: (month: SolarHijriMonth) => void;
   locale?: CalendarLocale;
   weekStartsOn?: WeekStart;
+  minDate?: SolarHijriDate;
+  maxDate?: SolarHijriDate;
   isDateDisabled?: (date: SolarHijriDate) => boolean;
   className?: string;
   previousLabel?: string;
@@ -27,6 +30,8 @@ export function SolarHijriCalendar({
   onMonthChange,
   locale = "fa",
   weekStartsOn = "saturday",
+  minDate,
+  maxDate,
   isDateDisabled,
   className,
   previousLabel,
@@ -38,9 +43,12 @@ export function SolarHijriCalendar({
   const [internalMonth, setInternalMonth] = useState<SolarHijriMonth>({ year: value?.year ?? today.year, month: value?.month ?? today.month });
   const visibleMonth = month ?? internalMonth;
   const direction = locale === "fa" ? "rtl" : "ltr";
+  const disabledMatcher = useMemo(() => {
+    return createDateDisabledMatcher({ minDate, maxDate, isDateDisabled });
+  }, [isDateDisabled, maxDate, minDate]);
   const days = useMemo(
-    () => buildCalendarDays(visibleMonth, value, isDateDisabled, weekStartsOn),
-    [visibleMonth, value, isDateDisabled, weekStartsOn],
+    () => buildCalendarDays(visibleMonth, value, disabledMatcher, weekStartsOn),
+    [visibleMonth, value, disabledMatcher, weekStartsOn],
   );
   const weekdayLabels = getWeekdayLabels(locale, weekStartsOn);
 

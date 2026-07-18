@@ -23,6 +23,7 @@ Current implementation summary on 2026-07-18:
 - React multiple-date calendar component in ./src/SolarHijriMultipleCalendar.tsx.
 - React range calendar component in ./src/SolarHijriRangeCalendar.tsx.
 - Date math and grid generation in ./src/calendarMath.ts.
+- Date bounds and disabled matcher composition in ./src/constraints.ts.
 - Range, multiple selection, and matcher helpers in ./src/selection.ts.
 - Public types in ./src/types.ts.
 - Locale labels in ./src/labels.ts.

@@ -8,7 +8,10 @@ test("react playground supports date selection", async ({ page }) => {
   await page.goto("/");
   await expect(page.getByTestId("selected-date")).toHaveText("1403-01-15");
 
-  await page.getByLabel("Solar Hijri calendar").getByRole("gridcell", { name: "1403-01-16 (2024-04-04)" }).click();
+  const calendar = page.getByLabel("Solar Hijri calendar");
+  await expect(calendar.getByRole("gridcell", { name: "1403-01-02 (2024-03-21)" })).toBeDisabled();
+
+  await calendar.getByRole("gridcell", { name: "1403-01-16 (2024-04-04)" }).click();
   await expect(page.getByTestId("selected-date")).toHaveText("1403-01-16");
 });
 

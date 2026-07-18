@@ -1,5 +1,6 @@
 import { useMemo, useState, type ReactNode } from "react";
 import { addMonths, buildCalendarDays, getToday } from "./calendarMath";
+import { createDateDisabledMatcher } from "./constraints";
 import { formatDay, formatMonthTitle, getWeekdayLabels } from "./labels";
 import { isDateSelected, normalizeSelectedDates, toggleSelectedDate, type MultipleSelectionOptions } from "./selection";
 import type { CalendarDay, CalendarLocale, SolarHijriDate, SolarHijriMonth, WeekStart } from "./types";
@@ -11,6 +12,8 @@ export type SolarHijriMultipleCalendarProps = {
   onMonthChange?: (month: SolarHijriMonth) => void;
   locale?: CalendarLocale;
   weekStartsOn?: WeekStart;
+  minDate?: SolarHijriDate;
+  maxDate?: SolarHijriDate;
   isDateDisabled?: (date: SolarHijriDate) => boolean;
   className?: string;
   previousLabel?: string;
@@ -29,6 +32,8 @@ export function SolarHijriMultipleCalendar({
   onMonthChange,
   locale = "fa",
   weekStartsOn = "saturday",
+  minDate,
+  maxDate,
   isDateDisabled,
   className,
   previousLabel,
@@ -48,19 +53,22 @@ export function SolarHijriMultipleCalendar({
   const visibleMonth = month ?? internalMonth;
   const direction = locale === "fa" ? "rtl" : "ltr";
   const weekdayLabels = getWeekdayLabels(locale, weekStartsOn);
+  const disabledMatcher = useMemo(() => {
+    return createDateDisabledMatcher({ minDate, maxDate, isDateDisabled });
+  }, [isDateDisabled, maxDate, minDate]);
   const selectionOptions: MultipleSelectionOptions = {
-    disabled: isDateDisabled,
+    disabled: disabledMatcher,
     max,
     min,
     required,
   };
 
   const days = useMemo(() => {
-    return buildCalendarDays(visibleMonth, null, isDateDisabled, weekStartsOn).map((day) => ({
+    return buildCalendarDays(visibleMonth, null, disabledMatcher, weekStartsOn).map((day) => ({
       ...day,
       isSelected: isDateSelected(day, selectedDates),
     }));
-  }, [isDateDisabled, selectedDates, visibleMonth, weekStartsOn]);
+  }, [disabledMatcher, selectedDates, visibleMonth, weekStartsOn]);
 
   const setVisibleMonth = (nextMonth: SolarHijriMonth) => {
     if (!month) setInternalMonth(nextMonth);
@@ -140,4 +148,3 @@ export function SolarHijriMultipleCalendar({
     </section>
   );
 }
-

@@ -5,6 +5,7 @@
 The current repository is a compact React package:
 
 - `src/calendarMath.ts`: Jalali conversion, key formatting, today, month length, month navigation, and month grid generation.
+- `src/constraints.ts`: pure min/max date bounds and disabled matcher composition.
 - `src/SolarHijriCalendar.tsx`: one inline controlled single-date calendar.
 - `src/SolarHijriMultipleCalendar.tsx`: inline controlled multiple-date calendar.
 - `src/SolarHijriRangeCalendar.tsx`: inline controlled range calendar.
@@ -75,6 +76,7 @@ Expose Gregorian and ISO conversions as adapters, not as the internal source of 
 - Extract framework-neutral core.
 - Add full date arithmetic and validation.
 - Add range, multiple, and disabled matcher engines.
+- Add shared min/max date constraints across all selection modes.
 - Add deterministic today/timezone injection for tests.
 - Add broad conversion fixtures, including leap years and boundary cases.
 - Add property-style tests for round-trip conversion and grid invariants.

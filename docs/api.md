@@ -36,6 +36,8 @@ Key props:
 - `onMonthChange?: (month: SolarHijriMonth) => void`
 - `locale?: "fa" | "en"`
 - `weekStartsOn?: "saturday" | "sunday"`
+- `minDate?: SolarHijriDate`
+- `maxDate?: SolarHijriDate`
 - `isDateDisabled?: (date: SolarHijriDate) => boolean`
 - `dayClassName?: string | ((day: CalendarDay) => string | undefined)`
 - `renderDay?: (day: CalendarDay) => React.ReactNode`
@@ -52,6 +54,8 @@ Key props:
 - `onMonthChange?: (month: SolarHijriMonth) => void`
 - `locale?: "fa" | "en"`
 - `weekStartsOn?: "saturday" | "sunday"`
+- `minDate?: SolarHijriDate`
+- `maxDate?: SolarHijriDate`
 - `isDateDisabled?: (date: SolarHijriDate) => boolean`
 - `allowSameDay?: boolean`
 - `excludeDisabled?: boolean`
@@ -72,6 +76,8 @@ Key props:
 - `onMonthChange?: (month: SolarHijriMonth) => void`
 - `locale?: "fa" | "en"`
 - `weekStartsOn?: "saturday" | "sunday"`
+- `minDate?: SolarHijriDate`
+- `maxDate?: SolarHijriDate`
 - `isDateDisabled?: (date: SolarHijriDate) => boolean`
 - `min?: number`
 - `max?: number`
@@ -87,6 +93,8 @@ Key props:
 - `CalendarDay`: generated day cell data for month grids.
 - `CalendarDayState`: `CalendarDay` plus optional range state flags.
 - `DateMatcher`: exact date, list of dates, range, or predicate.
+- `DateBounds`: `{ minDate?: SolarHijriDate; maxDate?: SolarHijriDate }`
+- `DateConstraintOptions`: date bounds plus an optional disabled callback.
 - `RangeSelectionOptions`: options for pure range selection.
 - `MultipleSelectionOptions`: options for pure multiple-date selection.
 
@@ -106,6 +114,9 @@ Key props:
 - `fromGregorianDate(date)`
 - `toIsoDate(date)`
 - `buildCalendarDays(visibleMonth, selectedDate, isDateDisabled, weekStartsOn)`
+- `isDateOutsideBounds(date, bounds)`
+- `isDateUnavailable(date, options)`
+- `createDateDisabledMatcher(options)`
 
 ## Selection Core
 

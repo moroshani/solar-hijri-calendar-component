@@ -51,6 +51,8 @@ export function Example() {
         onChange={setValue}
         locale="fa"
         weekStartsOn="saturday"
+        minDate={{ year: 1403, month: 1, day: 4 }}
+        maxDate={{ year: 1403, month: 1, day: 28 }}
       />
 
       <SolarHijriRangeCalendar
@@ -58,6 +60,8 @@ export function Example() {
         onChange={setRange}
         locale="fa"
         weekStartsOn="saturday"
+        minDate={{ year: 1403, month: 1, day: 4 }}
+        maxDate={{ year: 1403, month: 1, day: 28 }}
         excludeDisabled
       />
 
@@ -66,6 +70,8 @@ export function Example() {
         onChange={setDates}
         locale="fa"
         weekStartsOn="saturday"
+        minDate={{ year: 1403, month: 1, day: 4 }}
+        maxDate={{ year: 1403, month: 1, day: 28 }}
         max={5}
       />
     </>
@@ -91,6 +97,8 @@ import { dateKey, selectRangeDate } from "solar-hijri-calendar-component/core";
 | `onMonthChange` | `(month: SolarHijriMonth) => void` | optional | Called when the visible month changes. |
 | `locale` | `"fa" \| "en"` | `"fa"` | Calendar labels. |
 | `weekStartsOn` | `"saturday" \| "sunday"` | `"saturday"` | First day of week. |
+| `minDate` | `SolarHijriDate` | optional | Earliest selectable date, inclusive. |
+| `maxDate` | `SolarHijriDate` | optional | Latest selectable date, inclusive. |
 | `isDateDisabled` | `(date: SolarHijriDate) => boolean` | optional | Disable specific dates. |
 | `className` | `string` | optional | Additional root class. |
 | `dayClassName` | `string \| (day: CalendarDay) => string \| undefined` | optional | Add custom day classes. |
@@ -106,6 +114,8 @@ import { dateKey, selectRangeDate } from "solar-hijri-calendar-component/core";
 | `onMonthChange` | `(month: SolarHijriMonth) => void` | optional | Called when the visible month changes. |
 | `locale` | `"fa" \| "en"` | `"fa"` | Calendar labels. |
 | `weekStartsOn` | `"saturday" \| "sunday"` | `"saturday"` | First day of week. |
+| `minDate` | `SolarHijriDate` | optional | Earliest selectable date, inclusive. |
+| `maxDate` | `SolarHijriDate` | optional | Latest selectable date, inclusive. |
 | `isDateDisabled` | `(date: SolarHijriDate) => boolean` | optional | Disable specific dates. |
 | `allowSameDay` | `boolean` | `true` | Allow same-day ranges. |
 | `excludeDisabled` | `boolean` | `false` | Restart selection when a completed range crosses disabled dates. |
@@ -125,6 +135,8 @@ import { dateKey, selectRangeDate } from "solar-hijri-calendar-component/core";
 | `onMonthChange` | `(month: SolarHijriMonth) => void` | optional | Called when the visible month changes. |
 | `locale` | `"fa" \| "en"` | `"fa"` | Calendar labels. |
 | `weekStartsOn` | `"saturday" \| "sunday"` | `"saturday"` | First day of week. |
+| `minDate` | `SolarHijriDate` | optional | Earliest selectable date, inclusive. |
+| `maxDate` | `SolarHijriDate` | optional | Latest selectable date, inclusive. |
 | `isDateDisabled` | `(date: SolarHijriDate) => boolean` | optional | Disable specific dates. |
 | `min` | `number` | optional | Minimum selected date count. |
 | `max` | `number` | optional | Maximum selected date count. |

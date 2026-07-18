@@ -24,6 +24,8 @@ const initialMultipleDates: SolarHijriDate[] = [
   { year: 1403, month: 1, day: 14 },
   { year: 1403, month: 1, day: 21 },
 ];
+const minSelectableDate: SolarHijriDate = { year: 1403, month: 1, day: 4 };
+const maxSelectableDate: SolarHijriDate = { year: 1403, month: 1, day: 28 };
 
 const isFriday = (date: SolarHijriDate) => toGregorianDate(date).getUTCDay() === 5;
 
@@ -136,6 +138,8 @@ export function App() {
                   onMonthChange={setVisibleMonth}
                   locale={locale}
                   weekStartsOn={weekStartsOn}
+                  minDate={minSelectableDate}
+                  maxDate={maxSelectableDate}
                   isDateDisabled={disabledMatcher}
                   dayClassName={(day) => (day.day === 1 && day.isCurrentMonth ? "playground-day--first" : undefined)}
                   renderDay={(day) => (
@@ -156,6 +160,8 @@ export function App() {
                   onMonthChange={setVisibleMonth}
                   locale={locale}
                   weekStartsOn={weekStartsOn}
+                  minDate={minSelectableDate}
+                  maxDate={maxSelectableDate}
                   isDateDisabled={disabledMatcher}
                   excludeDisabled
                 />
@@ -170,6 +176,8 @@ export function App() {
                   onMonthChange={setVisibleMonth}
                   locale={locale}
                   weekStartsOn={weekStartsOn}
+                  minDate={minSelectableDate}
+                  maxDate={maxSelectableDate}
                   isDateDisabled={disabledMatcher}
                   min={1}
                   max={5}
