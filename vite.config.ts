@@ -5,10 +5,14 @@ export default defineConfig({
   plugins: [react()],
   build: {
     lib: {
-      entry: "src/index.ts",
+      entry: {
+        index: "src/index.ts",
+        core: "src/core.ts",
+        react: "src/react.ts",
+      },
       name: "SolarHijriCalendar",
       formats: ["es", "cjs"],
-      fileName: (format) => (format === "es" ? "index.js" : "index.cjs"),
+      fileName: (format, entryName) => `${entryName}.${format === "es" ? "js" : "cjs"}`,
       cssFileName: "styles",
     },
     rollupOptions: {
@@ -17,5 +21,6 @@ export default defineConfig({
   },
   test: {
     environment: "node",
+    include: ["src/**/*.test.ts"],
   },
 });

@@ -1,7 +1,8 @@
 import { useMemo, useState } from "react";
 import { addMonths, buildCalendarDays, getToday } from "./calendarMath";
 import { formatDay, formatMonthTitle, getWeekdayLabels } from "./labels";
-import type { CalendarLocale, SolarHijriDate, SolarHijriMonth, WeekStart } from "./types";
+import type { CalendarDay, CalendarLocale, SolarHijriDate, SolarHijriMonth, WeekStart } from "./types";
+import type { ReactNode } from "react";
 import "./styles.css";
 
 export type SolarHijriCalendarProps = {
@@ -15,6 +16,8 @@ export type SolarHijriCalendarProps = {
   className?: string;
   previousLabel?: string;
   nextLabel?: string;
+  dayClassName?: string | ((day: CalendarDay) => string | undefined);
+  renderDay?: (day: CalendarDay) => ReactNode;
 };
 
 export function SolarHijriCalendar({
@@ -28,6 +31,8 @@ export function SolarHijriCalendar({
   className,
   previousLabel,
   nextLabel,
+  dayClassName,
+  renderDay,
 }: SolarHijriCalendarProps) {
   const today = useMemo(() => getToday(), []);
   const [internalMonth, setInternalMonth] = useState<SolarHijriMonth>({ year: value?.year ?? today.year, month: value?.month ?? today.month });
@@ -42,6 +47,11 @@ export function SolarHijriCalendar({
   const setVisibleMonth = (nextMonth: SolarHijriMonth) => {
     if (!month) setInternalMonth(nextMonth);
     onMonthChange?.(nextMonth);
+  };
+
+  const resolveDayClassName = (day: CalendarDay) => {
+    if (!dayClassName) return undefined;
+    return typeof dayClassName === "function" ? dayClassName(day) : dayClassName;
   };
 
   return (
@@ -82,6 +92,7 @@ export function SolarHijriCalendar({
               !day.isCurrentMonth && "shc-calendar__day--muted",
               day.isToday && "shc-calendar__day--today",
               day.isSelected && "shc-calendar__day--selected",
+              resolveDayClassName(day),
             ]
               .filter(Boolean)
               .join(" ")}
@@ -93,7 +104,7 @@ export function SolarHijriCalendar({
             aria-label={`${day.key} (${day.isoDate})`}
             onClick={() => onChange({ year: day.year, month: day.month, day: day.day })}
           >
-            {formatDay(day.day, locale)}
+            {renderDay ? renderDay(day) : formatDay(day.day, locale)}
           </button>
         ))}
       </div>

@@ -20,9 +20,35 @@ export const toGregorianDate = (date: SolarHijriDate) => {
   return new Date(Date.UTC(gregorian.gy, gregorian.gm - 1, gregorian.gd));
 };
 
+export const fromGregorianDate = (date: Date): SolarHijriDate => {
+  const jalali = jalaali.toJalaali(date.getUTCFullYear(), date.getUTCMonth() + 1, date.getUTCDate());
+  return { year: jalali.jy, month: jalali.jm, day: jalali.jd };
+};
+
 export const toIsoDate = (date: SolarHijriDate) => {
   const gregorian = jalaali.toGregorian(date.year, date.month, date.day);
   return `${gregorian.gy}-${pad(gregorian.gm)}-${pad(gregorian.gd)}`;
+};
+
+export const compareDates = (left: SolarHijriDate, right: SolarHijriDate) => {
+  if (left.year !== right.year) return left.year - right.year;
+  if (left.month !== right.month) return left.month - right.month;
+  return left.day - right.day;
+};
+
+export const isBeforeDate = (left: SolarHijriDate, right: SolarHijriDate) => compareDates(left, right) < 0;
+
+export const isAfterDate = (left: SolarHijriDate, right: SolarHijriDate) => compareDates(left, right) > 0;
+
+export const addDays = (date: SolarHijriDate, delta: number): SolarHijriDate => {
+  const gregorian = toGregorianDate(date);
+  gregorian.setUTCDate(gregorian.getUTCDate() + delta);
+  return fromGregorianDate(gregorian);
+};
+
+export const differenceInCalendarDays = (left: SolarHijriDate, right: SolarHijriDate) => {
+  const dayMs = 24 * 60 * 60 * 1000;
+  return Math.round((toGregorianDate(left).getTime() - toGregorianDate(right).getTime()) / dayMs);
 };
 
 export const addMonths = (month: SolarHijriMonth, delta: number): SolarHijriMonth => {

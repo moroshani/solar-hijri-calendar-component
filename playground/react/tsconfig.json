@@ -1,0 +1,14 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "noEmit": true,
+    "paths": {
+      "solar-hijri-calendar-component/core": ["../../src/core.ts"],
+      "solar-hijri-calendar-component/react": ["../../src/react.ts"],
+      "solar-hijri-calendar-component": ["../../src/index.ts"],
+      "solar-hijri-calendar-component/styles.css": ["../../src/styles.css"]
+    },
+    "types": ["node", "vite/client"]
+  },
+  "include": ["src", "vite.config.ts", "../../src"]
+}

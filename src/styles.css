@@ -1,18 +1,29 @@
 .shc-calendar {
+  --shc-color-text: #172033;
+  --shc-color-background: #ffffff;
+  --shc-color-border: #d8dee9;
+  --shc-color-muted: #667085;
+  --shc-color-muted-day: #98a2b3;
+  --shc-color-disabled: #cbd5e1;
+  --shc-color-hover: #eef2f7;
+  --shc-color-accent: #1d4ed8;
+  --shc-color-accent-hover: #1e40af;
+  --shc-color-accent-ring: #2563eb;
+  --shc-color-range: #dbeafe;
+  --shc-color-range-preview: #eff6ff;
+  --shc-color-range-preview-ring: #bfdbfe;
+  --shc-color-on-accent: #ffffff;
+  --shc-radius: 8px;
+  --shc-day-radius: 6px;
+  --shc-font-family: Inter, Vazirmatn, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
   width: min(100%, 22rem);
-  color: #172033;
-  background: #ffffff;
-  border: 1px solid #d8dee9;
-  border-radius: 8px;
+  color: var(--shc-color-text);
+  background: var(--shc-color-background);
+  border: 1px solid var(--shc-color-border);
+  border-radius: var(--shc-radius);
   padding: 1rem;
-  font-family:
-    Inter,
-    Vazirmatn,
-    system-ui,
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    sans-serif;
+  font-family: var(--shc-font-family);
 }
 
 .shc-calendar__header {
@@ -36,7 +47,7 @@
   align-items: center;
   justify-content: center;
   border: 0;
-  border-radius: 6px;
+  border-radius: var(--shc-day-radius);
   background: transparent;
   color: inherit;
   cursor: pointer;
@@ -50,7 +61,7 @@
 
 .shc-calendar__nav:hover,
 .shc-calendar__day:hover {
-  background: #eef2f7;
+  background: var(--shc-color-hover);
 }
 
 .shc-calendar__weekdays,
@@ -65,7 +76,7 @@
 }
 
 .shc-calendar__weekday {
-  color: #667085;
+  color: var(--shc-color-muted);
   font-size: 0.75rem;
   font-weight: 700;
   text-align: center;
@@ -78,24 +89,46 @@
 }
 
 .shc-calendar__day--muted {
-  color: #98a2b3;
+  color: var(--shc-color-muted-day);
 }
 
 .shc-calendar__day--today {
-  box-shadow: inset 0 0 0 1px #2563eb;
+  box-shadow: inset 0 0 0 1px var(--shc-color-accent-ring);
 }
 
 .shc-calendar__day--selected {
-  background: #1d4ed8;
-  color: #ffffff;
+  background: var(--shc-color-accent);
+  color: var(--shc-color-on-accent);
+}
+
+.shc-calendar__day--in-range,
+.shc-calendar__day--range-preview {
+  background: var(--shc-color-range);
+  color: var(--shc-color-text);
+}
+
+.shc-calendar__day--range-preview {
+  background: var(--shc-color-range-preview);
+  box-shadow: inset 0 0 0 1px var(--shc-color-range-preview-ring);
+}
+
+.shc-calendar__day--range-start,
+.shc-calendar__day--range-end {
+  background: var(--shc-color-accent);
+  color: var(--shc-color-on-accent);
 }
 
 .shc-calendar__day--selected:hover {
-  background: #1e40af;
+  background: var(--shc-color-accent-hover);
+}
+
+.shc-calendar__day--in-range:hover,
+.shc-calendar__day--range-preview:hover {
+  background: var(--shc-color-range-preview-ring);
 }
 
 .shc-calendar__day:disabled {
-  color: #cbd5e1;
+  color: var(--shc-color-disabled);
   cursor: not-allowed;
   text-decoration: line-through;
 }

@@ -35,6 +35,16 @@
       "import": "./dist/index.js",
       "require": "./dist/index.cjs"
     },
+    "./core": {
+      "types": "./dist/core.d.ts",
+      "import": "./dist/core.js",
+      "require": "./dist/core.cjs"
+    },
+    "./react": {
+      "types": "./dist/react.d.ts",
+      "import": "./dist/react.js",
+      "require": "./dist/react.cjs"
+    },
     "./styles.css": "./dist/styles.css"
   },
   "files": [
@@ -42,8 +52,13 @@
   ],
   "scripts": {
     "build": "vite build && tsc -p tsconfig.build.json --emitDeclarationOnly",
-    "dev": "vite --host 127.0.0.1",
-    "lint": "tsc --noEmit",
+    "dev": "vite --config playground/react/vite.config.ts --host 127.0.0.1",
+    "dev:react": "vite --config playground/react/vite.config.ts --host 127.0.0.1",
+    "build:playground": "vite build --config playground/react/vite.config.ts",
+    "preview:react": "vite preview --config playground/react/vite.config.ts --host 127.0.0.1",
+    "lint": "tsc --noEmit && tsc -p playground/react/tsconfig.json --noEmit",
+    "screenshots": "playwright test --config tests/playwright/playwright.config.mjs --grep @visual",
+    "test:e2e": "playwright test --config tests/playwright/playwright.config.mjs --grep-invert @visual",
     "test": "vitest run"
   },
   "dependencies": {
@@ -54,13 +69,15 @@
     "react-dom": ">=18"
   },
   "devDependencies": {
-    "@vitejs/plugin-react": "^5.0.0",
+    "@playwright/test": "^1.61.1",
+    "@types/node": "^26.1.1",
     "@types/react": "^19.1.8",
     "@types/react-dom": "^19.1.6",
+    "@vitejs/plugin-react": "^5.0.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
     "typescript": "^5.8.3",
     "vite": "^6.3.5",
-    "vitest": "^3.2.4",
-    "react": "^19.1.0",
-    "react-dom": "^19.1.0"
+    "vitest": "^3.2.4"
   }
 }
