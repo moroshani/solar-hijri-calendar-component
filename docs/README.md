@@ -7,7 +7,7 @@ The project goal is to provide professional, accessible Solar Hijri / Jalali cal
 ## Current Status
 
 - Repository baseline date: 2026-07-18.
-- Current implementation: small React library package with one inline calendar component, date math helpers, labels, CSS, Vitest tests, and Vite library build.
+- Current implementation: small React library package with inline single, range, and multiple calendar components, date math helpers, selection engines, labels, CSS, Vitest tests, Vite library build, and a React playground.
 - Current package state: local package only. `npm view solar-hijri-calendar-component` returned 404 on 2026-07-18, so the package name was not published to npm at that time.
 - Checks at restart baseline: `npm run lint`, `npm test`, and `npm run build` passed on 2026-07-18.
 
@@ -21,6 +21,7 @@ The project goal is to provide professional, accessible Solar Hijri / Jalali cal
 - [Demo Deployment](./demo-deployment.md): GitHub Pages deployment and future custom-domain guidance.
 - [Ecosystem Research 2026-07-18](./research/ecosystem-research-2026-07-18.md): competitor and standards research with source links.
 - [User Signals 2026-07-18](./research/user-signals-2026-07-18.md): public repository and issue signals that influence feature priorities.
+- [Non-Jalali Feature Benchmark 2026-07-18](./research/non-jalali-feature-benchmark-2026-07-18.md): mature date-picker feature and UX patterns to match or exceed.
 - [AI Maintenance](./ai-maintenance.md): rules for keeping documentation useful for maintainers and coding agents.
 
 ## Maintenance Rules

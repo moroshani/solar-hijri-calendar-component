@@ -79,6 +79,13 @@ The command starts the React playground automatically, visits it at each viewpor
 
 The generated screenshots are ignored by git. Commit curated visual baselines separately only when the team chooses to add strict regression snapshots.
 
+Playwright writes interaction artifacts and visual artifacts to separate output folders when run through npm:
+
+- `npm run test:e2e`: `test-results/playwright-e2e`
+- `npm run screenshots`: `test-results/playwright-screenshots`
+
+This keeps traces, videos, and screenshots from colliding if a contributor starts both commands at the same time.
+
 CI runs the same screenshot command and uploads `artifacts/screenshots/latest` as a workflow artifact named `responsive-screenshots`.
 
 ## E2E Smoke Tests

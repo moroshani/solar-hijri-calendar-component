@@ -14,6 +14,8 @@ export type SolarHijriRange = {
   to: SolarHijriDate | null;
 };
 
+export type SolarHijriSelectionMode = "single" | "multiple" | "range";
+
 export type CalendarLocale = "fa" | "en";
 
 export type WeekStart = "saturday" | "sunday";

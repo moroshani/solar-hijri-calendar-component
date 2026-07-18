@@ -15,13 +15,15 @@ Read first:
 - AI maintenance rules: ./docs/ai-maintenance.md
 - Ecosystem research: ./docs/research/ecosystem-research-2026-07-18.md
 - User signals: ./docs/research/user-signals-2026-07-18.md
+- Non-Jalali feature benchmark: ./docs/research/non-jalali-feature-benchmark-2026-07-18.md
 
 Current implementation summary on 2026-07-18:
 
 - React inline calendar component in ./src/SolarHijriCalendar.tsx.
+- React multiple-date calendar component in ./src/SolarHijriMultipleCalendar.tsx.
 - React range calendar component in ./src/SolarHijriRangeCalendar.tsx.
 - Date math and grid generation in ./src/calendarMath.ts.
-- Range selection helpers in ./src/selection.ts.
+- Range, multiple selection, and matcher helpers in ./src/selection.ts.
 - Public types in ./src/types.ts.
 - Locale labels in ./src/labels.ts.
 - Styles in ./src/styles.css.

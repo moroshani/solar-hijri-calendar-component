@@ -18,6 +18,13 @@ export type RangeSelectionOptions = {
   maxDays?: number;
 };
 
+export type MultipleSelectionOptions = {
+  disabled?: DateMatcher | DateMatcher[];
+  max?: number;
+  min?: number;
+  required?: boolean;
+};
+
 export type RangeBoundary = "start" | "end" | "inside" | "outside";
 
 export const emptyRange = (): SolarHijriRange => ({ from: null, to: null });
@@ -73,6 +80,38 @@ export const isDateDisabledByMatchers = (date: SolarHijriDate, matchers: DateMat
   if (!matchers) return false;
   const matcherList = Array.isArray(matchers) ? matchers : [matchers];
   return matcherList.some((matcher) => isDateMatched(date, matcher));
+};
+
+export const isDateSelected = (date: SolarHijriDate, selectedDates: SolarHijriDate[] | null | undefined) => {
+  return Boolean(selectedDates?.some((selectedDate) => isSameDate(date, selectedDate)));
+};
+
+export const normalizeSelectedDates = (selectedDates: SolarHijriDate[] | null | undefined) => {
+  if (!selectedDates?.length) return [];
+  const sortedDates = [...selectedDates].sort(compareDates);
+  return sortedDates.filter((date, index) => {
+    const previousDate = sortedDates[index - 1];
+    return !previousDate || !isSameDate(date, previousDate);
+  });
+};
+
+export const toggleSelectedDate = (
+  currentSelection: SolarHijriDate[] | null | undefined,
+  date: SolarHijriDate,
+  options: MultipleSelectionOptions = {},
+): SolarHijriDate[] => {
+  const selectedDates = normalizeSelectedDates(currentSelection);
+  if (isDateDisabledByMatchers(date, options.disabled)) return selectedDates;
+
+  const exists = isDateSelected(date, selectedDates);
+  if (exists) {
+    if (options.required && selectedDates.length <= 1) return selectedDates;
+    if (options.min !== undefined && selectedDates.length <= options.min) return selectedDates;
+    return selectedDates.filter((selectedDate) => !isSameDate(selectedDate, date));
+  }
+
+  if (options.max !== undefined && selectedDates.length >= options.max) return selectedDates;
+  return normalizeSelectedDates([...selectedDates, date]);
 };
 
 export const rangeContainsDisabledDate = (

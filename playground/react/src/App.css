@@ -146,7 +146,7 @@ select {
 
 .calendar-pair {
   display: grid;
-  grid-template-columns: repeat(2, minmax(17rem, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr));
   gap: 1rem;
   min-width: 0;
 }
@@ -220,6 +220,11 @@ select {
   font-size: 0.95rem;
 }
 
+.state-item__value--small {
+  font-size: 0.88rem;
+  line-height: 1.35;
+}
+
 .scenario-strip {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -248,8 +253,7 @@ select {
 }
 
 @media (max-width: 860px) {
-  .playground__shell,
-  .calendar-pair {
+  .playground__shell {
     grid-template-columns: 1fr;
   }
 

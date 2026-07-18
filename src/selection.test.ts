@@ -3,10 +3,13 @@ import {
   getRangeBoundary,
   getRangeLength,
   isDateDisabledByMatchers,
+  isDateSelected,
+  normalizeSelectedDates,
   isDateInRange,
   orderRange,
   rangeContainsDisabledDate,
   selectRangeDate,
+  toggleSelectedDate,
 } from "./selection";
 
 const farvardin10 = { year: 1403, month: 1, day: 10 };
@@ -59,3 +62,23 @@ describe("range selection", () => {
   });
 });
 
+describe("multiple selection", () => {
+  it("toggles selected dates in sorted order", () => {
+    const selected = toggleSelectedDate([farvardin15], farvardin10);
+    expect(selected).toEqual([farvardin10, farvardin15]);
+    expect(toggleSelectedDate(selected, farvardin10)).toEqual([farvardin15]);
+  });
+
+  it("normalizes selected dates", () => {
+    expect(normalizeSelectedDates([farvardin15, farvardin10, farvardin10])).toEqual([farvardin10, farvardin15]);
+    expect(isDateSelected(farvardin12, [farvardin10, farvardin15])).toBe(false);
+  });
+
+  it("honors min, max, required, and disabled options", () => {
+    expect(toggleSelectedDate([farvardin10], farvardin10, { required: true })).toEqual([farvardin10]);
+    expect(toggleSelectedDate([], farvardin10, { max: 0 })).toEqual([]);
+    expect(toggleSelectedDate([farvardin10, farvardin12], farvardin12, { min: 2 })).toEqual([farvardin10, farvardin12]);
+    expect(toggleSelectedDate([farvardin10, farvardin12], farvardin15, { max: 2 })).toEqual([farvardin10, farvardin12]);
+    expect(toggleSelectedDate([farvardin10], farvardin12, { disabled: farvardin12 })).toEqual([farvardin10]);
+  });
+});

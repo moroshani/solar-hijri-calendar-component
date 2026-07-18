@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 import {
   SolarHijriCalendar,
+  SolarHijriMultipleCalendar,
   SolarHijriRangeCalendar,
   type CalendarLocale,
   type SolarHijriDate,
@@ -18,6 +19,11 @@ const initialRange: SolarHijriRange = {
   from: { year: 1403, month: 1, day: 11 },
   to: { year: 1403, month: 1, day: 16 },
 };
+const initialMultipleDates: SolarHijriDate[] = [
+  { year: 1403, month: 1, day: 7 },
+  { year: 1403, month: 1, day: 14 },
+  { year: 1403, month: 1, day: 21 },
+];
 
 const isFriday = (date: SolarHijriDate) => toGregorianDate(date).getUTCDay() === 5;
 
@@ -29,6 +35,7 @@ const formatVisibleDay = (day: number, locale: CalendarLocale) => {
 export function App() {
   const [selectedDate, setSelectedDate] = useState<SolarHijriDate | null>(initialDate);
   const [selectedRange, setSelectedRange] = useState<SolarHijriRange>(initialRange);
+  const [selectedDates, setSelectedDates] = useState<SolarHijriDate[]>(initialMultipleDates);
   const [visibleMonth, setVisibleMonth] = useState<SolarHijriMonth>(initialMonth);
   const [locale, setLocale] = useState<CalendarLocale>("fa");
   const [weekStartsOn, setWeekStartsOn] = useState<WeekStart>("saturday");
@@ -46,6 +53,7 @@ export function App() {
   const selectedKey = selectedDate ? dateKey(selectedDate) : "none";
   const rangeKey = `${selectedRange.from ? dateKey(selectedRange.from) : "open"} - ${selectedRange.to ? dateKey(selectedRange.to) : "open"}`;
   const rangeLength = getRangeLength(selectedRange);
+  const multipleKey = selectedDates.map(dateKey).join(", ");
   const monthKey = `${visibleMonth.year}-${String(visibleMonth.month).padStart(2, "0")}`;
 
   return (
@@ -152,6 +160,22 @@ export function App() {
                   excludeDisabled
                 />
               </div>
+
+              <div className="calendar-frame">
+                <div className="calendar-frame__label">Multiple</div>
+                <SolarHijriMultipleCalendar
+                  value={selectedDates}
+                  onChange={setSelectedDates}
+                  month={visibleMonth}
+                  onMonthChange={setVisibleMonth}
+                  locale={locale}
+                  weekStartsOn={weekStartsOn}
+                  isDateDisabled={disabledMatcher}
+                  min={1}
+                  max={5}
+                  required
+                />
+              </div>
             </div>
 
             <div className="playground__state" aria-label="Calendar state">
@@ -172,6 +196,18 @@ export function App() {
                   <span className="state-item__label">Range Days</span>
                   <span className="state-item__value" data-testid="range-length">
                     {rangeLength || "open"}
+                  </span>
+                </div>
+                <div className="state-item">
+                  <span className="state-item__label">Multiple</span>
+                  <span className="state-item__value state-item__value--small" data-testid="selected-multiple">
+                    {multipleKey}
+                  </span>
+                </div>
+                <div className="state-item">
+                  <span className="state-item__label">Multiple Count</span>
+                  <span className="state-item__value" data-testid="multiple-count">
+                    {selectedDates.length}
                   </span>
                 </div>
                 <div className="state-item">
@@ -199,7 +235,7 @@ export function App() {
             </div>
             <div className="scenario">
               <div className="scenario__label">Selection</div>
-              <div className="scenario__value">Single and range engines.</div>
+              <div className="scenario__value">Single, range, and multiple engines.</div>
             </div>
             <div className="scenario">
               <div className="scenario__label">Visual QA</div>

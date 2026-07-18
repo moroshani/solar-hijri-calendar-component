@@ -4,6 +4,10 @@ import fs from "node:fs";
 const port = Number(process.env.PLAYGROUND_PORT ?? 5173);
 const baseURL = `http://127.0.0.1:${port}`;
 const isCI = Boolean(process.env.CI);
+const lifecycleEvent = process.env.npm_lifecycle_event;
+const outputFolderName =
+  process.env.SHC_PLAYWRIGHT_OUTPUT_NAME ??
+  (lifecycleEvent === "screenshots" ? "playwright-screenshots" : lifecycleEvent === "test:e2e" ? "playwright-e2e" : "playwright");
 const browserExecutablePath =
   process.env.SHC_CHROMIUM_EXECUTABLE ??
   [
@@ -23,8 +27,8 @@ const viewportProjects = [
 
 export default defineConfig({
   testDir: ".",
-  outputDir: "../../test-results/playwright",
-  reporter: [["list"], ["html", { outputFolder: "../../playwright-report", open: "never" }]],
+  outputDir: `../../test-results/${outputFolderName}`,
+  reporter: [["list"], ["html", { outputFolder: `../../playwright-report/${outputFolderName}`, open: "never" }]],
   fullyParallel: true,
   forbidOnly: isCI,
   retries: isCI ? 2 : 0,

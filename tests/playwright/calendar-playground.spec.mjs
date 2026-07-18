@@ -25,6 +25,20 @@ test("react playground supports range selection", async ({ page }) => {
   await expect(page.getByTestId("range-length")).toHaveText("6");
 });
 
+test("react playground supports multiple selection", async ({ page }) => {
+  await page.goto("/");
+  await expect(page.getByTestId("multiple-count")).toHaveText("3");
+
+  const multipleCalendar = page.getByLabel("Solar Hijri multiple calendar");
+  await multipleCalendar.getByRole("gridcell", { name: "1403-01-22 (2024-04-10)" }).click();
+  await expect(page.getByTestId("multiple-count")).toHaveText("4");
+  await expect(page.getByTestId("selected-multiple")).toContainText("1403-01-22");
+
+  await multipleCalendar.getByRole("gridcell", { name: "1403-01-14 (2024-04-02)" }).click();
+  await expect(page.getByTestId("multiple-count")).toHaveText("3");
+  await expect(page.getByTestId("selected-multiple")).not.toContainText("1403-01-14");
+});
+
 test("react playground captures responsive screenshots @visual", async ({ page }, testInfo) => {
   fs.mkdirSync(screenshotDir, { recursive: true });
 

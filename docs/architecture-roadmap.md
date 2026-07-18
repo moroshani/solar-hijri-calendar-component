@@ -6,8 +6,9 @@ The current repository is a compact React package:
 
 - `src/calendarMath.ts`: Jalali conversion, key formatting, today, month length, month navigation, and month grid generation.
 - `src/SolarHijriCalendar.tsx`: one inline controlled single-date calendar.
+- `src/SolarHijriMultipleCalendar.tsx`: inline controlled multiple-date calendar.
 - `src/SolarHijriRangeCalendar.tsx`: inline controlled range calendar.
-- `src/selection.ts`: pure range selection and matcher helpers.
+- `src/selection.ts`: pure range, multiple selection, and matcher helpers.
 - `src/labels.ts`: Persian and English month/weekday labels and digit formatting.
 - `src/types.ts`: date, month, locale, week-start, and calendar-day types.
 - `src/styles.css`: default component styles.

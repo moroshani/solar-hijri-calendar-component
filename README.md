@@ -32,6 +32,7 @@ React is a peer dependency.
 import { useState } from "react";
 import {
   SolarHijriCalendar,
+  SolarHijriMultipleCalendar,
   SolarHijriRangeCalendar,
   type SolarHijriDate,
   type SolarHijriRange,
@@ -41,6 +42,7 @@ import "solar-hijri-calendar-component/styles.css";
 export function Example() {
   const [value, setValue] = useState<SolarHijriDate | null>(null);
   const [range, setRange] = useState<SolarHijriRange>({ from: null, to: null });
+  const [dates, setDates] = useState<SolarHijriDate[]>([]);
 
   return (
     <>
@@ -57,6 +59,14 @@ export function Example() {
         locale="fa"
         weekStartsOn="saturday"
         excludeDisabled
+      />
+
+      <SolarHijriMultipleCalendar
+        value={dates}
+        onChange={setDates}
+        locale="fa"
+        weekStartsOn="saturday"
+        max={5}
       />
     </>
   );
@@ -104,6 +114,24 @@ import { dateKey, selectRangeDate } from "solar-hijri-calendar-component/core";
 | `className` | `string` | optional | Additional root class. |
 | `dayClassName` | `string \| (day: CalendarDayState) => string \| undefined` | optional | Add custom day classes. |
 | `renderDay` | `(day: CalendarDayState) => React.ReactNode` | optional | Render custom day content. |
+
+### `SolarHijriMultipleCalendar`
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `value` | `SolarHijriDate[] \| null` | `[]` | Selected dates. |
+| `onChange` | `(dates: SolarHijriDate[]) => void` | required | Called when selected dates change. |
+| `month` | `SolarHijriMonth` | current Jalali month | Controlled visible month. |
+| `onMonthChange` | `(month: SolarHijriMonth) => void` | optional | Called when the visible month changes. |
+| `locale` | `"fa" \| "en"` | `"fa"` | Calendar labels. |
+| `weekStartsOn` | `"saturday" \| "sunday"` | `"saturday"` | First day of week. |
+| `isDateDisabled` | `(date: SolarHijriDate) => boolean` | optional | Disable specific dates. |
+| `min` | `number` | optional | Minimum selected date count. |
+| `max` | `number` | optional | Maximum selected date count. |
+| `required` | `boolean` | `false` | Prevent clearing the final selected date. |
+| `className` | `string` | optional | Additional root class. |
+| `dayClassName` | `string \| (day: CalendarDay) => string \| undefined` | optional | Add custom day classes. |
+| `renderDay` | `(day: CalendarDay) => React.ReactNode` | optional | Render custom day content. |
 
 ## Local Development
 

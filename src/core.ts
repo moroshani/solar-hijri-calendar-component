@@ -25,9 +25,11 @@ export {
   isDateDisabledByMatchers,
   isDateInRange,
   isDateMatched,
+  isDateSelected,
+  normalizeSelectedDates,
   orderRange,
   rangeContainsDisabledDate,
   selectRangeDate,
+  toggleSelectedDate,
 } from "./selection";
-export type { DateMatcher, RangeBoundary, RangeSelectionOptions } from "./selection";
-
+export type { DateMatcher, MultipleSelectionOptions, RangeBoundary, RangeSelectionOptions } from "./selection";

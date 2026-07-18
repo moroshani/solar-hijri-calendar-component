@@ -7,7 +7,7 @@ This page tracks the exported API that examples and framework packages should us
 Use the root import for the complete React package surface:
 
 ```ts
-import { SolarHijriCalendar, SolarHijriRangeCalendar } from "solar-hijri-calendar-component";
+import { SolarHijriCalendar, SolarHijriMultipleCalendar, SolarHijriRangeCalendar } from "solar-hijri-calendar-component";
 ```
 
 Use the core subpath for framework-neutral logic:
@@ -60,6 +60,25 @@ Key props:
 - `dayClassName?: string | ((day: CalendarDayState) => string | undefined)`
 - `renderDay?: (day: CalendarDayState) => React.ReactNode`
 
+### `SolarHijriMultipleCalendar`
+
+Inline Solar Hijri multiple-date calendar.
+
+Key props:
+
+- `value?: SolarHijriDate[] | null`
+- `onChange: (dates: SolarHijriDate[]) => void`
+- `month?: SolarHijriMonth`
+- `onMonthChange?: (month: SolarHijriMonth) => void`
+- `locale?: "fa" | "en"`
+- `weekStartsOn?: "saturday" | "sunday"`
+- `isDateDisabled?: (date: SolarHijriDate) => boolean`
+- `min?: number`
+- `max?: number`
+- `required?: boolean`
+- `dayClassName?: string | ((day: CalendarDay) => string | undefined)`
+- `renderDay?: (day: CalendarDay) => React.ReactNode`
+
 ## Types
 
 - `SolarHijriDate`: `{ year: number; month: number; day: number }`
@@ -69,6 +88,7 @@ Key props:
 - `CalendarDayState`: `CalendarDay` plus optional range state flags.
 - `DateMatcher`: exact date, list of dates, range, or predicate.
 - `RangeSelectionOptions`: options for pure range selection.
+- `MultipleSelectionOptions`: options for pure multiple-date selection.
 
 ## Date Math
 
@@ -97,6 +117,9 @@ Key props:
 - `getRangeLength(range)`
 - `isDateMatched(date, matcher)`
 - `isDateDisabledByMatchers(date, matchers)`
+- `isDateSelected(date, selectedDates)`
+- `normalizeSelectedDates(selectedDates)`
+- `toggleSelectedDate(currentSelection, date, options)`
 - `rangeContainsDisabledDate(range, matchers)`
 - `selectRangeDate(currentRange, date, options)`
 - `createRangePreview(range, hoveredDate)`
