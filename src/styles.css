@@ -1,0 +1,101 @@
+.shc-calendar {
+  width: min(100%, 22rem);
+  color: #172033;
+  background: #ffffff;
+  border: 1px solid #d8dee9;
+  border-radius: 8px;
+  padding: 1rem;
+  font-family:
+    Inter,
+    Vazirmatn,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+}
+
+.shc-calendar__header {
+  display: grid;
+  grid-template-columns: 2.25rem 1fr 2.25rem;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.875rem;
+}
+
+.shc-calendar__title {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+.shc-calendar__nav,
+.shc-calendar__day {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+
+.shc-calendar__nav {
+  width: 2.25rem;
+  height: 2.25rem;
+  font-size: 1.5rem;
+}
+
+.shc-calendar__nav:hover,
+.shc-calendar__day:hover {
+  background: #eef2f7;
+}
+
+.shc-calendar__weekdays,
+.shc-calendar__grid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 0.25rem;
+}
+
+.shc-calendar__weekdays {
+  margin-bottom: 0.375rem;
+}
+
+.shc-calendar__weekday {
+  color: #667085;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+.shc-calendar__day {
+  aspect-ratio: 1;
+  min-width: 0;
+  font-size: 0.875rem;
+}
+
+.shc-calendar__day--muted {
+  color: #98a2b3;
+}
+
+.shc-calendar__day--today {
+  box-shadow: inset 0 0 0 1px #2563eb;
+}
+
+.shc-calendar__day--selected {
+  background: #1d4ed8;
+  color: #ffffff;
+}
+
+.shc-calendar__day--selected:hover {
+  background: #1e40af;
+}
+
+.shc-calendar__day:disabled {
+  color: #cbd5e1;
+  cursor: not-allowed;
+  text-decoration: line-through;
+}
