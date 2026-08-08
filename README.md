@@ -10,7 +10,7 @@ The goal is to provide a practical, accessible date picker foundation for Persia
 
 > Status: `0.1.0` is the first GitHub source release. The implementation and package tarball are verified. npm publication is still pending, so the npm installation command below will become active only after the first public package release.
 
-Try the responsive playground: https://moroshani.github.io/solar-hijri-calendar-component/
+Try the responsive testing lab: https://moroshani.github.io/solar-hijri-calendar-component/
 
 ## Features
 
@@ -20,6 +20,7 @@ Try the responsive playground: https://moroshani.github.io/solar-hijri-calendar-
 - Controlled selected date.
 - Controlled range selection.
 - Controlled multiple-date selection.
+- Direct Solar Hijri month and year navigation through the controlled `month` API.
 - Disabled-date support.
 - Custom day rendering and day class hooks.
 - Keyboard-accessible buttons.

@@ -4,42 +4,103 @@ import path from "node:path";
 
 const screenshotDir = path.resolve(process.env.SHC_SCREENSHOT_DIR ?? "artifacts/screenshots/latest");
 
+const selectableCurrentMonthDays = (calendar) =>
+  calendar.locator(
+    '.shc-calendar__day:not(.shc-calendar__day--muted):not(:disabled):not([aria-selected="true"])',
+  );
+
+const dateKeyFrom = async (day) => {
+  const label = await day.getAttribute("aria-label");
+  const key = label?.match(/^\d{4}-\d{2}-\d{2}/)?.[0];
+
+  expect(key).toBeTruthy();
+  return key;
+};
+
 test("react playground supports date selection", async ({ page }) => {
   await page.goto("/");
-  await expect(page.getByTestId("selected-date")).toHaveText("1403-01-15");
 
   const calendar = page.getByLabel("Solar Hijri calendar");
-  await expect(calendar.getByRole("gridcell", { name: "1403-01-02 (2024-03-21)" })).toBeDisabled();
+  const initialValue = await page.getByTestId("selected-date").textContent();
+  const nextDay = selectableCurrentMonthDays(calendar).first();
+  const nextKey = await dateKeyFrom(nextDay);
 
-  await calendar.getByRole("gridcell", { name: "1403-01-16 (2024-04-04)" }).click();
-  await expect(page.getByTestId("selected-date")).toHaveText("1403-01-16");
+  await expect(calendar.locator(".shc-calendar__day:disabled").first()).toBeVisible();
+  await nextDay.click();
+  await expect(page.getByTestId("selected-date")).toHaveText(nextKey);
+  expect(nextKey).not.toBe(initialValue);
 });
 
 test("react playground supports range selection", async ({ page }) => {
   await page.goto("/");
-  await expect(page.getByTestId("selected-range")).toHaveText("1403-01-11 - 1403-01-16");
+  await page.getByRole("button", { name: "Range", exact: true }).click();
+  await page.getByRole("checkbox", { name: /Disable Fridays/ }).uncheck();
 
   const rangeCalendar = page.getByLabel("Solar Hijri range calendar");
-  await rangeCalendar.getByRole("gridcell", { name: "1403-01-18 (2024-04-06)" }).click();
-  await expect(page.getByTestId("selected-range")).toHaveText("1403-01-18 - open");
+  const availableDays = selectableCurrentMonthDays(rangeCalendar);
+  const startDay = availableDays.nth(1);
+  const endDay = availableDays.nth(2);
+  const startKey = await dateKeyFrom(startDay);
+  const endKey = await dateKeyFrom(endDay);
 
-  await rangeCalendar.getByRole("gridcell", { name: "1403-01-23 (2024-04-11)" }).click();
-  await expect(page.getByTestId("selected-range")).toHaveText("1403-01-18 - 1403-01-23");
-  await expect(page.getByTestId("range-length")).toHaveText("6");
+  await startDay.click();
+  await expect(page.getByTestId("selected-range")).toHaveText(`${startKey} - open`);
+
+  await rangeCalendar.getByRole("gridcell", { name: new RegExp(`^${endKey} `) }).click();
+  await expect(page.getByTestId("selected-range")).toHaveText(`${startKey} - ${endKey}`);
+  await expect(page.getByTestId("range-length")).toHaveText("2");
 });
 
 test("react playground supports multiple selection", async ({ page }) => {
   await page.goto("/");
+  await page.getByRole("button", { name: "Multiple", exact: true }).click();
   await expect(page.getByTestId("multiple-count")).toHaveText("3");
 
   const multipleCalendar = page.getByLabel("Solar Hijri multiple calendar");
-  await multipleCalendar.getByRole("gridcell", { name: "1403-01-22 (2024-04-10)" }).click();
-  await expect(page.getByTestId("multiple-count")).toHaveText("4");
-  await expect(page.getByTestId("selected-multiple")).toContainText("1403-01-22");
+  const extraDay = selectableCurrentMonthDays(multipleCalendar).first();
+  const extraKey = await dateKeyFrom(extraDay);
 
-  await multipleCalendar.getByRole("gridcell", { name: "1403-01-14 (2024-04-02)" }).click();
+  await extraDay.click();
+  await expect(page.getByTestId("multiple-count")).toHaveText("4");
+  await expect(page.getByTestId("selected-multiple")).toContainText(extraKey);
+
+  await multipleCalendar.getByRole("gridcell", { name: new RegExp(`^${extraKey} `) }).click();
   await expect(page.getByTestId("multiple-count")).toHaveText("3");
-  await expect(page.getByTestId("selected-multiple")).not.toContainText("1403-01-14");
+  await expect(page.getByTestId("selected-multiple")).not.toContainText(extraKey);
+});
+
+test("react playground keeps controls and generated code in sync", async ({ page }) => {
+  await page.goto("/");
+
+  await page.getByRole("button", { name: "English", exact: true }).click();
+  await page.getByRole("button", { name: "Sunday", exact: true }).click();
+  await page.getByRole("button", { name: "Range", exact: true }).click();
+
+  const calendar = page.getByLabel("Solar Hijri range calendar");
+  await expect(calendar).toHaveAttribute("dir", "ltr");
+  await expect(page.getByTestId("generated-code")).toContainText('locale="en"');
+  await expect(page.getByTestId("generated-code")).toContainText('weekStartsOn="sunday"');
+  await expect(page.getByTestId("generated-code")).toContainText("excludeDisabled");
+});
+
+test("react playground supports direct month and year navigation", async ({ page }) => {
+  await page.goto("/");
+
+  const monthPicker = page.getByTestId("month-picker");
+  const yearPicker = page.getByTestId("year-picker");
+  const initialMonth = Number(await monthPicker.inputValue());
+  const initialYear = Number(await yearPicker.inputValue());
+  const nextMonth = initialMonth === 12 ? 1 : initialMonth + 1;
+  const nextYear = initialYear + 1;
+
+  await monthPicker.selectOption(String(nextMonth));
+  await yearPicker.selectOption(String(nextYear));
+
+  await expect(page.getByTestId("visible-month")).toHaveText(
+    `${nextYear}-${String(nextMonth).padStart(2, "0")}`,
+  );
+  await expect(page.getByTestId("generated-code")).toContainText("month={month}");
+  await expect(page.getByTestId("generated-code")).toContainText("onMonthChange={setMonth}");
 });
 
 test("react playground captures responsive screenshots @visual", async ({ page }, testInfo) => {
@@ -61,6 +122,11 @@ test("react playground captures responsive screenshots @visual", async ({ page }
       }
     `,
   });
+
+  const hasHorizontalOverflow = await page.evaluate(
+    () => document.documentElement.scrollWidth > document.documentElement.clientWidth + 1,
+  );
+  expect(hasHorizontalOverflow).toBe(false);
 
   const prefix = testInfo.project.name.replace(/[^a-z0-9-]/gi, "-").toLowerCase();
 

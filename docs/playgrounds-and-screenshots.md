@@ -14,6 +14,11 @@ npm run dev
 
 `npm run dev` currently runs the React playground at `http://127.0.0.1:5173`.
 
+The public React lab exposes the three selection engines from one focused test
+surface. It includes controlled month and year pickers, Persian/English locale,
+Saturday/Sunday week starts, disabled-date scenarios, normalized Solar Hijri and
+Gregorian output, and generated React integration code.
+
 Direct command:
 
 ```bash
