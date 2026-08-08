@@ -2,9 +2,14 @@
 
 A lightweight React calendar component for Solar Hijri / Jalali dates.
 
+[![CI](https://github.com/moroshani/solar-hijri-calendar-component/actions/workflows/ci.yml/badge.svg)](https://github.com/moroshani/solar-hijri-calendar-component/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](./LICENSE)
+
 The goal is to provide a practical, accessible date picker foundation for Persian and RTL applications while keeping the core API small enough to adapt inside real products.
 
-> Restart note, 2026-07-18: this repository is being shaped into a professional open-source project for Solar Hijri calendar primitives and components across frontend stacks. See [docs/README.md](./docs/README.md), [docs/product-vision.md](./docs/product-vision.md), and [docs/architecture-roadmap.md](./docs/architecture-roadmap.md).
+> Status: `0.1.0` release candidate. The implementation and package tarball are verified locally. npm publication is still pending, so the npm installation command below will become active only after the first public package release.
+
+Try the responsive playground: https://moroshani.github.io/solar-hijri-calendar-component/
 
 ## Features
 
@@ -13,12 +18,24 @@ The goal is to provide a practical, accessible date picker foundation for Persia
 - RTL-friendly UI.
 - Controlled selected date.
 - Controlled range selection.
+- Controlled multiple-date selection.
 - Disabled-date support.
 - Custom day rendering and day class hooks.
 - Keyboard-accessible buttons.
 - Small TypeScript API.
 
 ## Install
+
+The package name was still available on npm when checked on 2026-08-08, but the package is not published yet. Until the first release is announced, use a source checkout for evaluation:
+
+```bash
+git clone https://github.com/moroshani/solar-hijri-calendar-component.git
+cd solar-hijri-calendar-component
+npm ci
+npm run verify
+```
+
+After npm publication:
 
 ```bash
 npm install solar-hijri-calendar-component
@@ -148,9 +165,8 @@ import { dateKey, selectRangeDate } from "solar-hijri-calendar-component/core";
 ## Local Development
 
 ```bash
-npm install
-npm test
-npm run build
+npm ci
+npm run verify
 ```
 
 Run the local playground:
@@ -179,6 +195,17 @@ Research and planning docs:
 - [Playgrounds and screenshots](./docs/playgrounds-and-screenshots.md)
 - [Demo deployment](./docs/demo-deployment.md)
 - [AI documentation maintenance](./docs/ai-maintenance.md)
+- [Release process](./docs/release-process.md)
+
+## Contributing
+
+Contributions are welcome. Start with [CONTRIBUTING.md](./CONTRIBUTING.md), review the [Code of Conduct](./CODE_OF_CONDUCT.md), and use the repository issue templates for reproducible bugs or scoped feature proposals.
+
+AI-assisted contributions are welcome when the contributor reviews and understands the result, discloses material assistance, follows project conventions, and runs the relevant verification.
+
+## Maintainer
+
+Mohammad Mehdi Roshani ([@moroshani](https://github.com/moroshani)). See [MAINTAINERS.md](./MAINTAINERS.md).
 
 ## License
 

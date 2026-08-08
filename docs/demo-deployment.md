@@ -26,20 +26,8 @@ https://moroshani.github.io/solar-hijri-calendar-component/
 
 ## Custom Domain
 
-For a custom domain, configure the domain in GitHub Pages settings and change the build base to `/`.
-
-Recommended public domain:
-
-```text
-calendar.moroshani.com
-```
-
-Recommended DNS shape:
-
-- `calendar.moroshani.com` as the stable public GitHub Pages demo.
-- `preview.calendar.moroshani.com` as an optional VPS-backed preview environment later.
+No custom domain is currently owned or configured for this project. Keep the reproducible GitHub Pages URL as the canonical demo until the maintainer intentionally chooses and controls a domain. When that happens, configure GitHub Pages and change the build base to `/` in the same reviewed release.
 
 ## VPS Position
 
 A VPS is useful later for dynamic previews, saved playground states, API examples, analytics, nightly branch builds, and private previews. It is not the best first public demo host because the open-source demo should be reproducible from repository history.
-

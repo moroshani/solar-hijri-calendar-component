@@ -38,4 +38,3 @@ This note captures demand signals from public GitHub repositories, topic pages, 
 - `svelte-persian-datepicker`: https://github.com/hamedf62/svelte-persian-datepicker
 - `persian-datepicker-element`: https://github.com/mehrabix/persian-datepicker-element
 - `date-fns-jalali`: https://github.com/date-fns-jalali/date-fns-jalali
-

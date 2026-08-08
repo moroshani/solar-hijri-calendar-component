@@ -53,4 +53,3 @@ Before merging meaningful changes:
 - [ ] Framework-specific docs use idiomatic examples for that framework.
 - [ ] `llms.txt` links are still valid.
 - [ ] Dated research claims are not presented as timeless facts.
-

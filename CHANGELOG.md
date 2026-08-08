@@ -1,0 +1,27 @@
+# Changelog
+
+All notable changes to this project are documented here.
+
+The project follows semantic versioning after `1.0.0`. Pre-1.0 releases may refine the public API, with breaking changes called out explicitly.
+
+## [Unreleased]
+
+### Changed
+
+- Hardened package output, contributor guidance, security contact, and release documentation for the first public release.
+
+## [0.1.0] - Unreleased
+
+### Added
+
+- Controlled single-date React calendar.
+- Controlled range calendar with range constraints and disabled-date handling.
+- Controlled multiple-date calendar with count limits and required selection support.
+- Framework-neutral Solar Hijri date math, conversion, constraints, and selection helpers.
+- Persian and English labels with RTL-aware presentation.
+- React playground with responsive interaction and visual verification.
+- ESM, CommonJS, TypeScript declaration, and CSS package exports.
+- CI for lint, unit tests, builds, Playwright interaction tests, and responsive screenshots.
+
+[Unreleased]: https://github.com/moroshani/solar-hijri-calendar-component/compare/v0.1.0...HEAD
+[0.1.0]: https://github.com/moroshani/solar-hijri-calendar-component/releases/tag/v0.1.0

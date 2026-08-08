@@ -56,4 +56,3 @@ Use `dayClassName` for state-driven styling:
 ```
 
 These hooks are intentionally small. Future headless APIs should expose the same day state without requiring the default DOM.
-

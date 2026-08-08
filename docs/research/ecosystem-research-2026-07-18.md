@@ -106,4 +106,3 @@ This order preserves momentum from the current code while avoiding the trap of h
 - Vue Persian datetime picker package: https://www.npmjs.com/package/vue-persian-datetime-picker
 - Ant Design Jalali wrapper package: https://www.npmjs.com/package/antd-jalali
 - Ant Design Jalali Plus wrapper package: https://www.npmjs.com/package/antd-jalali-plus
-

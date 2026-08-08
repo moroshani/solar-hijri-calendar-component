@@ -75,4 +75,3 @@ Recommended package path:
 - Do not bundle large UI frameworks into the core package.
 - Do not depend on one app framework such as Next.js, Nuxt, SvelteKit, or Angular CLI for core behavior.
 - Do not hide Jalali date semantics behind JavaScript `Date` objects.
-

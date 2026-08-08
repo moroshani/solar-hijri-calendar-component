@@ -65,11 +65,12 @@ Expose Gregorian and ISO conversions as adapters, not as the internal source of 
 
 ### Phase 0: Repository Restart
 
-- Record research and roadmap.
-- Decide package name and npm scope before first publish.
-- Add issue templates, pull request template, code of conduct, release notes policy, and docs maintenance rules.
-- Add package provenance/release automation plan.
-- Keep CI passing.
+- [x] Record research and roadmap.
+- [x] Decide the initial unscoped package name before first publish.
+- [x] Add issue templates, pull request template, code of conduct, release notes policy, and docs maintenance rules.
+- [x] Document the provenance and release automation plan.
+- [ ] Publish `0.1.0` to npm and verify installation from the registry.
+- [ ] Keep CI and the public demo passing after publication.
 
 ### Phase 1: Core Correctness
 
