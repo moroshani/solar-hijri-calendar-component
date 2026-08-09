@@ -6,6 +6,18 @@ The project follows semantic versioning after `1.0.0`. Pre-1.0 releases may refi
 
 ## [Unreleased]
 
+### Added
+
+- Rebuilt the public GitHub Pages testing lab with explicit month/year selectors,
+  single/range/multiple mode switching, localization and constraint controls, a
+  live state inspector, and generated React integration code.
+- Added responsive browser coverage for controlled month/year navigation.
+
+### Changed
+
+- Expanded the responsive interaction matrix from 15 to 25 Playwright checks.
+- Reworked the lab layout for focused desktop and mobile component evaluation.
+
 ## [0.1.0] - 2026-08-08
 
 ### Added

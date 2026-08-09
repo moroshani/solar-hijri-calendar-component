@@ -1,6 +1,11 @@
 # Demo Deployment
 
-The public demo is built from `playground/react` and deployed with GitHub Pages.
+The public testing lab is built from `playground/react` and deployed with GitHub
+Pages at `https://moroshani.github.io/solar-hijri-calendar-component/`.
+
+The deployed surface includes explicit month/year selectors, single/range/multiple
+selection, locale and week-start controls, disabled-date scenarios, a state
+inspector, and generated React integration code.
 
 ## GitHub Pages
 
@@ -10,7 +15,9 @@ Workflow:
 .github/workflows/demo.yml
 ```
 
-The workflow runs on pushes to `main` and manual dispatch. It installs dependencies, runs lint, unit tests, the library build, and the playground build, then uploads `dist-playground/react` to GitHub Pages.
+The workflow runs on pushes to `main` and manual dispatch. It installs locked
+dependencies, runs TypeScript checks, unit tests, the library build, and the lab
+build, then uploads `dist-playground/react` to GitHub Pages.
 
 The default Pages base path is:
 
@@ -23,6 +30,11 @@ That supports the standard repository URL:
 ```text
 https://moroshani.github.io/solar-hijri-calendar-component/
 ```
+
+Before pushing a lab change, run `npm run verify`; this covers the 320, 390, 768,
+1024, and 1440 px browser matrix used for interaction and screenshot QA. After
+the push, verify that the Pages workflow succeeded and that the live HTML points
+to the newly hashed JavaScript and CSS assets.
 
 ## Custom Domain
 

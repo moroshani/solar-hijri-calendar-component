@@ -6,10 +6,10 @@ The project goal is to provide professional, accessible Solar Hijri / Jalali cal
 
 ## Current Status
 
-- Repository baseline date: 2026-08-08.
-- Current implementation: small React library package with inline single, range, and multiple calendar components, date math helpers, selection engines, labels, CSS, Vitest tests, Vite library build, and a React playground.
-- Current package state: `0.1.0` release candidate. `npm view solar-hijri-calendar-component` returned 404 on 2026-08-08, so the package name remains unpublished.
-- Release-candidate checks on 2026-08-08: clean dependency install, zero known audit vulnerabilities, TypeScript lint, 22 unit tests, library and playground builds, 15 responsive Playwright interaction tests, 5 visual captures, npm tarball inspection, and separate ESM, CommonJS, TypeScript, React, and CSS consumer checks all passed.
+- Repository baseline date: 2026-08-09.
+- Current implementation: React single, range, and multiple calendar components; framework-neutral date math, constraints, and selection entry points; Persian/English labels; CSS; Vitest coverage; Vite library packaging; and an interactive React testing lab.
+- Current package state: GitHub source release `v0.1.0` is published and the testing lab is live at `https://moroshani.github.io/solar-hijri-calendar-component/`. The npm package remains unpublished.
+- Current verification: clean dependency install, zero known audit vulnerabilities, TypeScript checks, 22 unit tests, library and lab builds, 25 responsive Playwright interaction checks, 5 visual captures, npm tarball inspection, and separate ESM, CommonJS, TypeScript, React, and CSS consumer checks have passed.
 
 ## Documentation Map
 

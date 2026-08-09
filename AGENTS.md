@@ -6,7 +6,7 @@ Build trustworthy, accessible Solar Hijri and Jalali date primitives and fronten
 
 ## Start Here
 
-1. Read `README.md` and `docs/README.md`.
+1. Read `README.md` and `docs/README.md` for the current release and verification state.
 2. Read `docs/api.md` before changing exports.
 3. Read `docs/architecture-roadmap.md` before changing package boundaries.
 4. Search existing issues and pull requests before starting public work.
@@ -18,7 +18,8 @@ Build trustworthy, accessible Solar Hijri and Jalali date primitives and fronten
 - `src/selection.ts`: range and multiple selection behavior.
 - `src/SolarHijri*Calendar.tsx`: React components.
 - `src/core.ts`, `src/react.ts`, `src/index.ts`: package entry points.
-- `playground/react`: interactive development and visual QA surface.
+- `playground/react`: interactive development and public testing lab, including
+  controlled month/year navigation and all three selection modes.
 - `tests/playwright`: responsive browser interaction and screenshots.
 
 Prefer codebase-memory graph tools for code discovery when available. Use direct text search for configuration and documentation.
@@ -36,6 +37,11 @@ git diff --check
 
 For narrow changes, run focused tests during development and the complete verification before release or review.
 
+The canonical deployed lab is
+`https://moroshani.github.io/solar-hijri-calendar-component/`. Changes to the
+playground are not complete until the local browser matrix passes and the Pages
+workflow succeeds.
+
 ## Contribution Rules
 
 - Preserve framework-neutral date behavior below framework adapters.
@@ -45,4 +51,3 @@ For narrow changes, run focused tests during development and the complete verifi
 - Update public docs and the changelog with public API changes.
 - Do not commit credentials, private data, package tokens, or generated release archives.
 - AI-assisted changes must be reviewed, understood, disclosed when material, and tested by the contributor.
-

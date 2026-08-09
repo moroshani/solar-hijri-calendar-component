@@ -15,7 +15,8 @@ npm run dev
 `npm run dev` currently runs the React playground at `http://127.0.0.1:5173`.
 
 The public React lab exposes the three selection engines from one focused test
-surface. It includes controlled month and year pickers, Persian/English locale,
+surface. Explicit month and year selects drive the package's controlled `month`
+and `onMonthChange` API. The lab also includes Persian/English locale,
 Saturday/Sunday week starts, disabled-date scenarios, normalized Solar Hijri and
 Gregorian output, and generated React integration code.
 
@@ -77,10 +78,8 @@ Run:
 npm run screenshots
 ```
 
-The command starts the React playground automatically, visits it at each viewport, and captures:
-
-- The calendar preview surface.
-- The full page.
+The command starts the React playground automatically, visits it at each
+viewport, and captures the complete lab in each responsive layout.
 
 The generated screenshots are ignored by git. Commit curated visual baselines separately only when the team chooses to add strict regression snapshots.
 
@@ -117,7 +116,10 @@ The package architecture should stay modular: users should be able to install on
 
 ## Hosting Recommendation
 
-Use GitHub Pages for the public documentation and stable demo by default. It is free for a public open-source repository, works well for static Vite output, supports custom domains, and keeps deployments tied to repository history.
+The canonical public lab is deployed through GitHub Pages at
+`https://moroshani.github.io/solar-hijri-calendar-component/`. Keep Pages as the
+default host while the lab remains a static Vite application so deployments stay
+tied to reviewed repository history.
 
 Use a VPS as an optional preview and operations layer when the project needs server behavior that GitHub Pages cannot provide, such as:
 
@@ -128,7 +130,8 @@ Use a VPS as an optional preview and operations layer when the project needs ser
 - Nightly builds from multiple branches.
 - Private preview environments.
 
-Recommended domain split:
+Possible future domain split, only after the maintainer owns and configures a
+domain:
 
 - `calendar.moroshani.com`: public docs and stable playground on GitHub Pages.
 - `preview.calendar.moroshani.com`: optional VPS deployment for experimental builds.

@@ -1,10 +1,10 @@
 # Architecture And Roadmap
 
-## Baseline On 2026-07-18
+## Current Baseline On 2026-08-09
 
 The current repository is a compact React package:
 
-- `src/calendarMath.ts`: Jalali conversion, key formatting, today, month length, month navigation, and month grid generation.
+- `src/calendarMath.ts`: Jalali conversion, comparison, date arithmetic, key formatting, today, month length, month navigation, and month grid generation.
 - `src/constraints.ts`: pure min/max date bounds and disabled matcher composition.
 - `src/SolarHijriCalendar.tsx`: one inline controlled single-date calendar.
 - `src/SolarHijriMultipleCalendar.tsx`: inline controlled multiple-date calendar.
@@ -13,8 +13,12 @@ The current repository is a compact React package:
 - `src/labels.ts`: Persian and English month/weekday labels and digit formatting.
 - `src/types.ts`: date, month, locale, week-start, and calendar-day types.
 - `src/styles.css`: default component styles.
+- `src/core.ts`, `src/react.ts`, and `src/index.ts`: framework-neutral, React,
+  and compatibility package entry points.
 - `src/calendarMath.test.ts` and `src/selection.test.ts`: Vitest coverage for date math, conversions, grid output, and range selection.
-- Build tooling: Vite library mode, TypeScript declarations, React peer dependencies, GitHub Actions CI.
+- `playground/react`: deployed interactive testing lab with controlled month/year
+  navigation and responsive browser QA.
+- Build tooling: Vite library mode, TypeScript declarations, React peer dependencies, GitHub Actions CI, CodeQL, and Pages deployment.
 
 ## Recommended Package Architecture
 
@@ -48,7 +52,10 @@ examples/
   angular/
 ```
 
-If the project remains small during the first restart phase, this can be introduced gradually. The first practical step is to extract a framework-neutral `core` module while keeping the existing React API working.
+This structure should be introduced gradually. A framework-neutral `core` entry
+point already exists inside the current package; splitting it into independent
+workspace packages should wait until the API surface justifies the added release
+complexity.
 
 ## Public API Direction
 
@@ -69,15 +76,18 @@ Expose Gregorian and ISO conversions as adapters, not as the internal source of 
 - [x] Decide the initial unscoped package name before first publish.
 - [x] Add issue templates, pull request template, code of conduct, release notes policy, and docs maintenance rules.
 - [x] Document the provenance and release automation plan.
+- [x] Publish GitHub source release `v0.1.0`.
+- [x] Deploy and verify the public GitHub Pages testing lab.
 - [ ] Publish `0.1.0` to npm and verify installation from the registry.
-- [ ] Keep CI and the public demo passing after publication.
+- [x] Keep CI and the public demo passing after the source release.
 
 ### Phase 1: Core Correctness
 
-- Extract framework-neutral core.
-- Add full date arithmetic and validation.
-- Add range, multiple, and disabled matcher engines.
-- Add shared min/max date constraints across all selection modes.
+- [x] Expose a framework-neutral core entry point.
+- [ ] Complete date arithmetic and validation beyond the current compare,
+  conversion, add-day/add-month, and difference helpers.
+- [x] Add range, multiple, and disabled matcher engines.
+- [x] Add shared min/max date constraints across all selection modes.
 - Add deterministic today/timezone injection for tests.
 - Add broad conversion fixtures, including leap years and boundary cases.
 - Add property-style tests for round-trip conversion and grid invariants.

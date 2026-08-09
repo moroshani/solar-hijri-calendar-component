@@ -8,9 +8,10 @@ A lightweight React calendar component for Solar Hijri / Jalali dates.
 
 The goal is to provide a practical, accessible date picker foundation for Persian and RTL applications while keeping the core API small enough to adapt inside real products.
 
-> Status: `0.1.0` is the first GitHub source release. The implementation and package tarball are verified. npm publication is still pending, so the npm installation command below will become active only after the first public package release.
+> Status: `v0.1.0` is the first GitHub source release. The implementation and package tarball are verified, and the public testing lab is deployed. npm publication is still pending, so the npm installation command below will become active only after the first registry release.
 
-Try the responsive testing lab: https://moroshani.github.io/solar-hijri-calendar-component/
+Try the responsive testing lab, including explicit month/year selectors and all
+three selection modes: https://moroshani.github.io/solar-hijri-calendar-component/
 
 ## Features
 
@@ -35,6 +36,7 @@ git clone https://github.com/moroshani/solar-hijri-calendar-component.git
 cd solar-hijri-calendar-component
 npm ci
 npm run verify
+npm run package:check
 ```
 
 After npm publication:
