@@ -8,8 +8,10 @@ Build trustworthy, accessible Solar Hijri and Jalali date primitives and fronten
 
 1. Read `README.md` and `docs/README.md` for the current release and verification state.
 2. Read `docs/api.md` before changing exports.
-3. Read `docs/architecture-roadmap.md` before changing package boundaries.
-4. Search existing issues and pull requests before starting public work.
+3. Read `docs/implementation-plan.md` for the active package, order, and
+   acceptance criteria.
+4. Read `docs/architecture-roadmap.md` before changing package boundaries.
+5. Search existing issues and pull requests before starting public work.
 
 ## Architecture
 
@@ -49,5 +51,7 @@ workflow succeeds.
 - Keep Persian, RTL, keyboard, and screen-reader behavior first-class.
 - Add regression tests for date math and selection behavior.
 - Update public docs and the changelog with public API changes.
+- Update `docs/implementation-plan.md` when a work package starts, finishes,
+  changes scope, or becomes blocked.
 - Do not commit credentials, private data, package tokens, or generated release archives.
 - AI-assisted changes must be reviewed, understood, disclosed when material, and tested by the contributor.

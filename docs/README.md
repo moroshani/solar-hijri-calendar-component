@@ -6,16 +6,18 @@ The project goal is to provide professional, accessible Solar Hijri / Jalali cal
 
 ## Current Status
 
-- Repository baseline date: 2026-08-09.
+- Repository baseline date: 2026-08-19.
 - Current implementation: React single, range, and multiple calendar components; framework-neutral date math, constraints, and selection entry points; Persian/English labels; CSS; Vitest coverage; Vite library packaging; and an interactive React testing lab.
-- Current package state: GitHub source release `v0.1.0` is published and the testing lab is live at `https://moroshani.github.io/solar-hijri-calendar-component/`. The npm package remains unpublished.
-- Current verification: clean dependency install, zero known audit vulnerabilities, TypeScript checks, 22 unit tests, library and lab builds, 25 responsive Playwright interaction checks, 5 visual captures, npm tarball inspection, and separate ESM, CommonJS, TypeScript, React, and CSS consumer checks have passed.
+- Current package state: GitHub source release `v0.1.0` is published and the testing lab is live at `https://moroshani.github.io/solar-hijri-calendar-component/`. The npm package remains unpublished. `main` now includes maintenance merge `8bfafed4`, so a registry publication must use a new reviewed version/tag instead of reusing `v0.1.0`.
+- Current verification: clean dependency install, zero known audit vulnerabilities, TypeScript checks, 22 unit tests, library and lab builds, 25 responsive Playwright interaction checks, 5 visual captures, npm tarball inspection, and separate ESM, CommonJS, TypeScript, React, and CSS consumer checks have passed. Post-maintenance CI, CodeQL, and Demo workflows are green.
 
 ## Documentation Map
 
 - [Product Vision](./product-vision.md): product thesis, users, principles, scope, and feature pillars.
 - [API Reference](./api.md): exported components, types, date math, and selection helpers.
 - [Theming](./theming.md): CSS variables and custom day rendering.
+- [Implementation Plan](./implementation-plan.md): active release sequence,
+  work packages, dependencies, acceptance criteria, and handoff state.
 - [Architecture And Roadmap](./architecture-roadmap.md): recommended package architecture, phases, release strategy, and testing strategy.
 - [Playgrounds And Screenshots](./playgrounds-and-screenshots.md): local stack playgrounds, Playwright screenshots, and hosting recommendation.
 - [Demo Deployment](./demo-deployment.md): GitHub Pages deployment and future custom-domain guidance.

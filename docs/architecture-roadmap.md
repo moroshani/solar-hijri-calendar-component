@@ -1,6 +1,10 @@
 # Architecture And Roadmap
 
-## Current Baseline On 2026-08-09
+This file describes strategic direction. Use
+[`implementation-plan.md`](./implementation-plan.md) for the active release
+sequence, work-package status, dependencies, and acceptance criteria.
+
+## Current Baseline On 2026-08-19
 
 The current repository is a compact React package:
 
@@ -15,10 +19,15 @@ The current repository is a compact React package:
 - `src/styles.css`: default component styles.
 - `src/core.ts`, `src/react.ts`, and `src/index.ts`: framework-neutral, React,
   and compatibility package entry points.
-- `src/calendarMath.test.ts` and `src/selection.test.ts`: Vitest coverage for date math, conversions, grid output, and range selection.
+- `src/calendarMath.test.ts`, `src/constraints.test.ts`, and
+  `src/selection.test.ts`: Vitest coverage for date math, conversions, grid
+  output, constraints, and selection behavior.
 - `playground/react`: deployed interactive testing lab with controlled month/year
   navigation and responsive browser QA.
 - Build tooling: Vite library mode, TypeScript declarations, React peer dependencies, GitHub Actions CI, CodeQL, and Pages deployment.
+- Release state: GitHub source release `v0.1.0` exists, `main` includes verified
+  dependency maintenance through `8bfafed4`, and npm publication is pending a
+  new reviewed version and tag.
 
 ## Recommended Package Architecture
 
@@ -78,48 +87,79 @@ Expose Gregorian and ISO conversions as adapters, not as the internal source of 
 - [x] Document the provenance and release automation plan.
 - [x] Publish GitHub source release `v0.1.0`.
 - [x] Deploy and verify the public GitHub Pages testing lab.
-- [ ] Publish `0.1.0` to npm and verify installation from the registry.
+- [x] Repair the post-release grouped dependency update and restore a clean audit.
+- [ ] Create a new reviewed version/tag, publish it to npm, and verify a clean
+  consumer installation from the registry.
 - [x] Keep CI and the public demo passing after the source release.
 
 ### Phase 1: Core Correctness
 
 - [x] Expose a framework-neutral core entry point.
+- [x] Add comparison, conversion, day/month arithmetic, difference, month-length,
+  and calendar-grid helpers.
+- [x] Add range, multiple, disabled matcher, and shared min/max constraint engines.
 - [ ] Complete date arithmetic and validation beyond the current compare,
-  conversion, add-day/add-month, and difference helpers.
-- [x] Add range, multiple, and disabled matcher engines.
-- [x] Add shared min/max date constraints across all selection modes.
-- Add deterministic today/timezone injection for tests.
-- Add broad conversion fixtures, including leap years and boundary cases.
-- Add property-style tests for round-trip conversion and grid invariants.
+  conversion, add-day/add-month, and difference helpers: validation, clamp,
+  min/max, week/year arithmetic, and explicit invalid-date behavior remain.
+- [ ] Add deterministic today/timezone injection for tests.
+- [ ] Add broad conversion fixtures, including leap years and boundary cases.
+- [ ] Add property-style tests for round-trip conversion and grid invariants.
 
 ### Phase 2: React Production Surface
 
-- Keep a simple `SolarHijriCalendar` component.
-- Add headless hooks: `useSolarHijriCalendar`, `useSolarHijriRange`, `useSolarHijriDatePicker`.
-- Add styled components: `Calendar`, `DatePicker`, `DateRangePicker`, `MonthPicker`, `YearPicker`.
-- Add multi-month, min/max, disabled matchers, presets, clear/today/apply actions, and controlled/uncontrolled modes.
-- Implement WAI-ARIA keyboard behavior and focus management.
-- Add Playwright tests for keyboard navigation, RTL, popover/dialog focus, and mobile layouts.
+- [x] Keep a simple controlled `SolarHijriCalendar` component.
+- [x] Add controlled range and multiple-date calendar components.
+- [x] Add controlled month navigation, min/max bounds, disabled matchers, range
+  length rules, and multiple-selection count rules.
+- [x] Add basic grid roles, labels, selected state, RTL presentation, and mobile
+  interaction/visual coverage.
+- [ ] Add headless hooks: `useSolarHijriCalendar`, `useSolarHijriRange`, and
+  `useSolarHijriDatePicker`.
+- [ ] Add styled picker surfaces: `DatePicker`, `DateRangePicker`, `MonthPicker`,
+  and `YearPicker`.
+- [ ] Add multi-month layouts, presets, clear/today/apply actions, and
+  controlled/uncontrolled modes.
+- [ ] Implement complete WAI-ARIA grid keyboard behavior, roving focus, and
+  popover/dialog focus management. Current day buttons do not implement arrow-key
+  navigation.
+- [ ] Add Playwright tests for keyboard navigation, RTL focus order,
+  popover/dialog focus, and picker workflows.
 
 ### Phase 3: Documentation Site
 
-- Add a docs app with live examples.
-- Add API reference generated from TypeScript.
-- Add framework pages with installation, controlled/uncontrolled examples, theming, forms, SSR, accessibility, and migration notes.
-- Add `llms.txt` and compact AI context pages.
+- [x] Deploy an interactive React testing lab with generated integration code.
+- [x] Maintain a handwritten API reference and `llms.txt` context index.
+- [ ] Add a dedicated docs app with structured live examples.
+- [ ] Generate API reference material from TypeScript.
+- [ ] Add framework pages with installation, controlled/uncontrolled examples,
+  theming, forms, SSR, accessibility, and migration notes.
+- [ ] Add compact per-surface AI context pages if the package splits.
 
 ### Phase 4: Cross-Framework Packages
 
-- Ship Web Component package for broad reach.
-- Ship Vue 3 and Svelte 5 packages.
-- Ship Angular package after ControlValueAccessor and date adapter design are settled.
-- Add examples for each framework.
+- [ ] Ship a Web Component package for broad reach.
+- [ ] Ship Vue 3 and Svelte 5 packages.
+- [ ] Ship Angular after ControlValueAccessor and date adapter design settle.
+- [ ] Add examples and smoke tests for each framework.
 
 ### Phase 5: Ecosystem Integrations
 
-- Adapters for date-fns-jalali, dayjs/jalaliday, and native Intl formatting.
-- Optional design-system recipes for Tailwind, CSS Modules, Radix/shadcn-style composition, MUI field integration, and Ant Design field integration.
-- Optional holiday/preset package if there is enough demand.
+- [ ] Add adapters for date-fns-jalali, dayjs/jalaliday, and native Intl formatting.
+- [ ] Add optional design-system recipes for Tailwind, CSS Modules,
+  Radix/shadcn-style composition, MUI fields, and Ant Design fields.
+- [ ] Add an optional holiday/preset package only if demand justifies it.
+
+## Recommended Next Sequence
+
+1. Decide the first npm release boundary, bump from `0.1.0`, create a matching
+   reviewed tag, publish, and run clean consumer smoke tests.
+2. Finish date validation and boundary/property fixtures before broadening the
+   component surface.
+3. Implement the WAI-ARIA keyboard/focus model and prove it in Playwright.
+4. Extract headless React hooks, then add date/range/month/year picker surfaces.
+5. Build generated documentation around the stabilized API.
+6. Start cross-framework packages only after the core and accessibility
+   contracts have held through real use.
 
 ## Testing Strategy
 

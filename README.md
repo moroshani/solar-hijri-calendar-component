@@ -8,7 +8,7 @@ A lightweight React calendar component for Solar Hijri / Jalali dates.
 
 The goal is to provide a practical, accessible date picker foundation for Persian and RTL applications while keeping the core API small enough to adapt inside real products.
 
-> Status: `v0.1.0` is the first GitHub source release. The implementation and package tarball are verified, and the public testing lab is deployed. npm publication is still pending, so the npm installation command below will become active only after the first registry release.
+> Status: `v0.1.0` is the first GitHub source release. The implementation and package tarball are verified, the public testing lab is deployed, and the post-release dependency update has a clean audit. npm publication is still pending. Because `main` now differs from the `v0.1.0` tag, the first registry publication requires a new reviewed version and tag rather than publishing the newer tree as `0.1.0`.
 
 Try the responsive testing lab, including explicit month/year selectors and all
 three selection modes: https://moroshani.github.io/solar-hijri-calendar-component/
@@ -29,7 +29,9 @@ three selection modes: https://moroshani.github.io/solar-hijri-calendar-componen
 
 ## Install
 
-The package name was still available on npm when checked on 2026-08-08, but the package is not published yet. Until the first release is announced, use a source checkout for evaluation:
+The npm registry still returned `404 Not Found` for this package name when
+checked on 2026-08-19, and the package is not published yet. Until the first
+registry release is announced, use a source checkout for evaluation:
 
 ```bash
 git clone https://github.com/moroshani/solar-hijri-calendar-component.git
@@ -187,7 +189,11 @@ npm run screenshots
 
 ## Project Direction
 
-The current package exposes a small React calendar. The planned direction is a framework-neutral core plus idiomatic packages for React, Web Components, Vue, Svelte, Angular, and adapters for common date libraries.
+The current package exposes framework-neutral date, constraint, and selection
+helpers plus controlled React calendars for single, range, and multiple
+selection. The next product work is deeper correctness coverage, complete
+keyboard/focus behavior, headless picker APIs, and the first registry release.
+Cross-framework packages remain later milestones after the core API is stable.
 
 Research and planning docs:
 
@@ -195,6 +201,7 @@ Research and planning docs:
 - [Product vision](./docs/product-vision.md)
 - [API reference](./docs/api.md)
 - [Theming](./docs/theming.md)
+- [Implementation plan](./docs/implementation-plan.md)
 - [Architecture and roadmap](./docs/architecture-roadmap.md)
 - [Playgrounds and screenshots](./docs/playgrounds-and-screenshots.md)
 - [Demo deployment](./docs/demo-deployment.md)

@@ -23,10 +23,10 @@ Confirm that the package contains only runtime JavaScript, TypeScript declaratio
 
 1. Confirm the npm package name is still available.
 2. Authenticate through an applicant-controlled npm account with two-factor authentication.
-3. Verify that GitHub tag `v0.1.0` still identifies the exact reviewed package
-   intended for the registry; do not publish a different tree under the same
-   version.
-4. Create a clean temporary worktree at that tag, rerun the release gate, and run
+3. Create a new reviewed package version and GitHub tag. Current `main` includes
+   dependency maintenance after `v0.1.0`, so the first registry release must not
+   reuse version `0.1.0` for a different tree.
+4. Create a clean temporary worktree at the new tag, rerun the release gate, and run
    `npm publish --access public` there.
 5. Install the package from npm in a clean temporary consumer project.
 6. Verify ESM, CommonJS, TypeScript declarations, React peer dependencies, core exports, and CSS exports.

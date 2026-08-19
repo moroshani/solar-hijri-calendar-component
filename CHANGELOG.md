@@ -17,6 +17,16 @@ The project follows semantic versioning after `1.0.0`. Pre-1.0 releases may refi
 
 - Expanded the responsive interaction matrix from 15 to 25 Playwright checks.
 - Reworked the lab layout for focused desktop and mobile component evaluation.
+- Updated the grouped frontend dependency graph and raised the explicit Nano ID
+  security override to `3.3.18`.
+- Reconciled the roadmap with the implemented package and added an execution
+  plan with release boundaries, ordered work packages, acceptance criteria, and
+  durable agent handoff state.
+
+### Security
+
+- Restored a zero-vulnerability `npm audit --audit-level=high` result after the
+  grouped dependency update exposed an outdated Nano ID override.
 
 ## [0.1.0] - 2026-08-08
 

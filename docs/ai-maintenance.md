@@ -8,6 +8,8 @@ This project should be easy for coding agents to inspect, update, and verify wit
 - `llms.txt`: compact machine-readable index of the docs.
 - `docs/README.md`: canonical docs map and maintenance policy.
 - `docs/product-vision.md`: product goal and scope.
+- `docs/implementation-plan.md`: active work order, package status, and
+  acceptance criteria.
 - `docs/architecture-roadmap.md`: package architecture and milestones.
 - `docs/research/*.md`: dated, source-linked ecosystem research.
 
@@ -18,6 +20,7 @@ When a change affects public behavior, update all matching docs in the same pull
 - Public props, types, hooks, components, exports: update README and API docs.
 - Package names, install commands, import paths: update README, docs index, examples, and `llms.txt`.
 - Architecture/package layout: update architecture roadmap and docs index.
+- Work-package order, scope, status, or blockers: update the implementation plan.
 - Selection behavior, accessibility, keyboard commands, or localization: update feature docs and tests.
 - Research-sensitive claims: add a dated research note instead of overwriting old research context.
 
@@ -26,6 +29,7 @@ When a change affects public behavior, update all matching docs in the same pull
 Agents working in this repository should:
 
 - Read `docs/README.md` and `llms.txt` first.
+- Read the implementation plan before selecting or scoping work.
 - Prefer the codebase knowledge graph for code discovery when available.
 - Run `npm run lint`, `npm test`, and `npm run build` after changes unless the change is docs-only.
 - Use concrete dates in docs and issue summaries.
@@ -53,3 +57,4 @@ Before merging meaningful changes:
 - [ ] Framework-specific docs use idiomatic examples for that framework.
 - [ ] `llms.txt` links are still valid.
 - [ ] Dated research claims are not presented as timeless facts.
+- [ ] The implementation plan names the completed and next work packages.
