@@ -2,6 +2,7 @@ import {
   addDays,
   compareDates,
   differenceInCalendarDays,
+  earlierDate,
   isAfterDate,
   isBeforeDate,
   isSameDate,
@@ -70,7 +71,8 @@ export const isCompleteRange = (range: SolarHijriRange | null | undefined) => {
 export const orderRange = (range: SolarHijriRange): SolarHijriRange => {
   assertValidSolarHijriRange(range);
   if (!range.from || !range.to) return range;
-  return compareDates(range.from, range.to) <= 0 ? range : { from: range.to, to: range.from };
+  const from = earlierDate(range.from, range.to);
+  return from === range.from ? range : { from, to: range.from };
 };
 
 export const isDateInRange = (

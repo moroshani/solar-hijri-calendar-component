@@ -68,6 +68,14 @@ export const compareDates = (left: SolarHijriDate, right: SolarHijriDate) => {
   return left.day - right.day;
 };
 
+export const earlierDate = (left: SolarHijriDate, right: SolarHijriDate) => {
+  return compareDates(left, right) <= 0 ? left : right;
+};
+
+export const laterDate = (left: SolarHijriDate, right: SolarHijriDate) => {
+  return compareDates(left, right) >= 0 ? left : right;
+};
+
 export const isBeforeDate = (left: SolarHijriDate, right: SolarHijriDate) => compareDates(left, right) < 0;
 
 export const isAfterDate = (left: SolarHijriDate, right: SolarHijriDate) => compareDates(left, right) > 0;
@@ -78,6 +86,14 @@ export const addDays = (date: SolarHijriDate, delta: number): SolarHijriDate => 
   const gregorian = toGregorianDate(date);
   gregorian.setUTCDate(gregorian.getUTCDate() + delta);
   return fromGregorianDate(gregorian);
+};
+
+export const addWeeks = (date: SolarHijriDate, delta: number): SolarHijriDate => {
+  assertValidSolarHijriDate(date);
+  assertSafeInteger(delta, "delta");
+  const dayDelta = delta * 7;
+  assertSafeInteger(dayDelta, "resulting day delta");
+  return addDays(date, dayDelta);
 };
 
 export const differenceInCalendarDays = (left: SolarHijriDate, right: SolarHijriDate) => {
@@ -100,15 +116,30 @@ export const addMonths = (month: SolarHijriMonth, delta: number): SolarHijriMont
   return result;
 };
 
+export const getMonthLength = (month: SolarHijriMonth) => {
+  assertValidSolarHijriMonth(month);
+  return jalaali.jalaaliMonthLength(month.year, month.month);
+};
+
+export const addYears = (date: SolarHijriDate, delta: number): SolarHijriDate => {
+  assertValidSolarHijriDate(date);
+  assertSafeInteger(delta, "delta");
+  const targetYear = date.year + delta;
+  if (!Number.isSafeInteger(targetYear)) throw new RangeError("resulting date is outside the supported range");
+
+  const result = {
+    year: targetYear,
+    month: date.month,
+    day: Math.min(date.day, getMonthLength({ year: targetYear, month: date.month })),
+  };
+  assertValidSolarHijriDate(result, "resulting date");
+  return result;
+};
+
 const normalizeWeekday = (date: SolarHijriDate, weekStartsOn: WeekStart) => {
   const weekday = toGregorianDate(date).getUTCDay();
   if (weekStartsOn === "sunday") return weekday;
   return (weekday + 1) % 7;
-};
-
-export const getMonthLength = (month: SolarHijriMonth) => {
-  assertValidSolarHijriMonth(month);
-  return jalaali.jalaaliMonthLength(month.year, month.month);
 };
 
 export const buildCalendarDays = (

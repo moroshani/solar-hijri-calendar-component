@@ -159,12 +159,21 @@ Acceptance criteria:
 
 ### CORE-102: Arithmetic And Bounds
 
-Status: `ready`
+Status: `in progress` on branch `core/arithmetic-and-bounds`
 
 - Add week and year arithmetic.
 - Add reusable clamp, earlier/later, and inclusive bound helpers.
 - Define leap-day and end-of-month behavior before implementation.
 - Reuse these primitives in constraints and selection where appropriate.
+
+Defined behavior:
+
+- Weeks are exact seven-day movements and use the existing day arithmetic.
+- Years preserve month/day when valid and otherwise clamp to the target
+  month's final real day, identically for positive and negative deltas.
+- Earlier/later ties return the left input.
+- Bound checks and clamping are inclusive; values already within bounds remain
+  unchanged.
 
 Acceptance criteria:
 
@@ -365,8 +374,8 @@ only in chat.
 - Hosted verification: CI and CodeQL are green on candidate commit `4932708` in
   PR `#3`. The published `v0.1.1` release remains unchanged at `644085f`; no
   `0.2.0` tag or package has been created.
-- Active package: none.
-- Next package: `CORE-102`, arithmetic and bounds.
+- Active package: `CORE-102` on `core/arithmetic-and-bounds`.
+- Next package: `CORE-103`, deterministic clock boundary, after `CORE-102`.
 - External blocker: none.
 - Known deferred work: core correctness, complete keyboard/focus behavior,
   headless hooks, picker surfaces, generated docs, and cross-framework packages.

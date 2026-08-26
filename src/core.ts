@@ -21,20 +21,30 @@ export {
 export {
   addDays,
   addMonths,
+  addWeeks,
+  addYears,
   buildCalendarDays,
   compareDates,
   dateKey,
   differenceInCalendarDays,
+  earlierDate,
   fromGregorianDate,
   getMonthLength,
   getToday,
   isAfterDate,
   isBeforeDate,
   isSameDate,
+  laterDate,
   toGregorianDate,
   toIsoDate,
 } from "./calendarMath.js";
-export { createDateDisabledMatcher, isDateOutsideBounds, isDateUnavailable } from "./constraints.js";
+export {
+  clampDate,
+  createDateDisabledMatcher,
+  isDateOutsideBounds,
+  isDateUnavailable,
+  isDateWithinBounds,
+} from "./constraints.js";
 export type { DateBounds, DateConstraintOptions } from "./constraints.js";
 export { formatDay, formatMonthTitle, getWeekdayLabels, monthNames } from "./labels.js";
 export {
