@@ -2,9 +2,9 @@
 
 Status: active
 
-Baseline audited: 2026-08-19
+Baseline audited: 2026-08-26
 
-Code baseline: `8bfafed4`
+Code baseline: `95291f6` (pre-candidate base)
 
 Next work package: `REL-101A`
 
@@ -39,7 +39,7 @@ The repository currently provides:
 - A live GitHub Pages testing lab and GitHub source release `v0.1.0`.
 - A verified package tarball, but no npm registry publication.
 
-The package name returned `404 Not Found` from npm on 2026-08-19. Current
+The package name returned `404 Not Found` from npm on 2026-08-26. Current
 `main` differs from `v0.1.0`, so it must never be published to npm as version
 `0.1.0`.
 
@@ -88,7 +88,7 @@ Statuses: `next`, `ready`, `blocked`, `in progress`, or `done`.
 
 ### REL-101: First npm Publication
 
-Status: `next`
+Status: `in progress`
 
 Target: `0.1.1`
 
@@ -351,13 +351,18 @@ A work package is `done` only when:
 At the end of a work session, update this section instead of leaving progress
 only in chat.
 
-- Last audited: 2026-08-19.
+- Last audited: 2026-08-26.
 - Last completed: `PLAN-001`, roadmap reconciliation and this execution plan.
-- Verification: clean install and audit, 22 unit tests, package and playground
-  builds, 25 interaction tests, 5 visual captures, package inspection, local
-  link validation, and diff checks passed on 2026-08-19.
-- Active package: none.
-- Next package: `REL-101A` release audit and candidate preparation.
+- Verification: the local `0.1.1` candidate gate passed on 2026-08-26: clean
+  install, zero known audit vulnerabilities, TypeScript checks, 22 unit tests,
+  package and playground builds, 25 interaction tests, 5 visual captures,
+  publish dry-run, 34-file tarball inspection, clean ESM/CommonJS/TypeScript/
+  React/core/CSS consumers, and diff checks.
+- Live pre-candidate state: CI, CodeQL, and Demo are green on `95291f6`; the npm
+  package name was still available on 2026-08-26.
+- Active package: `REL-101A`, awaiting the candidate commit and green hosted
+  workflows on that exact commit.
+- Next package: `REL-101B` registry publication after the candidate is green.
 - External blocker: `REL-101B` requires maintainer-controlled npm authentication
   and 2FA.
 - Known deferred work: core correctness, complete keyboard/focus behavior,

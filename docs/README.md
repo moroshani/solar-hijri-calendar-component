@@ -6,10 +6,15 @@ The project goal is to provide professional, accessible Solar Hijri / Jalali cal
 
 ## Current Status
 
-- Repository baseline date: 2026-08-19.
+- Repository baseline date: 2026-08-26.
 - Current implementation: React single, range, and multiple calendar components; framework-neutral date math, constraints, and selection entry points; Persian/English labels; CSS; Vitest coverage; Vite library packaging; and an interactive React testing lab.
-- Current package state: GitHub source release `v0.1.0` is published and the testing lab is live at `https://moroshani.github.io/solar-hijri-calendar-component/`. The npm package remains unpublished. `main` now includes maintenance merge `8bfafed4`, so a registry publication must use a new reviewed version/tag instead of reusing `v0.1.0`.
-- Current verification: clean dependency install, zero known audit vulnerabilities, TypeScript checks, 22 unit tests, library and lab builds, 25 responsive Playwright interaction checks, 5 visual captures, npm tarball inspection, and separate ESM, CommonJS, TypeScript, React, and CSS consumer checks have passed. Post-maintenance CI, CodeQL, and Demo workflows are green.
+- Current package state: GitHub source release `v0.1.0` is published and the testing lab is live at `https://moroshani.github.io/solar-hijri-calendar-component/`. Version `0.1.1` is the reviewed candidate for the first npm publication; the registry package remains unpublished until `REL-101B` finishes.
+- Current verification: the local `0.1.1` candidate gate passed on 2026-08-26
+  with a clean install, zero known audit vulnerabilities, TypeScript checks, 22
+  unit tests, library and lab builds, 25 responsive Playwright interaction
+  checks, 5 visual captures, npm publish dry-run, tarball inspection, and clean
+  ESM, CommonJS, TypeScript, React, core, and CSS consumers. CI, CodeQL, and Demo
+  must still pass on the candidate commit before `REL-101A` is complete.
 
 ## Documentation Map
 
@@ -22,6 +27,7 @@ The project goal is to provide professional, accessible Solar Hijri / Jalali cal
 - [Playgrounds And Screenshots](./playgrounds-and-screenshots.md): local stack playgrounds, Playwright screenshots, and hosting recommendation.
 - [Demo Deployment](./demo-deployment.md): GitHub Pages deployment and future custom-domain guidance.
 - [Release Process](./release-process.md): versioning, verification, package inspection, publication, and rollback.
+- [v0.1.1 Release Notes](./releases/v0.1.1.md): prepared notes and verification record for the first npm release.
 - [Ecosystem Research 2026-07-18](./research/ecosystem-research-2026-07-18.md): competitor and standards research with source links.
 - [User Signals 2026-07-18](./research/user-signals-2026-07-18.md): public repository and issue signals that influence feature priorities.
 - [Non-Jalali Feature Benchmark 2026-07-18](./research/non-jalali-feature-benchmark-2026-07-18.md): mature date-picker feature and UX patterns to match or exceed.

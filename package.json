@@ -1,7 +1,7 @@
 {
   "name": "solar-hijri-calendar-component",
-  "version": "0.1.0",
-  "description": "Reusable React Solar Hijri / Jalali calendar component.",
+  "version": "0.1.1",
+  "description": "Accessible React calendars and framework-neutral utilities for Solar Hijri / Jalali dates.",
   "type": "module",
   "license": "MIT",
   "author": {
@@ -11,12 +11,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/moroshani/solar-hijri-calendar-component.git"
+    "url": "git+https://github.com/moroshani/solar-hijri-calendar-component.git"
   },
   "bugs": {
     "url": "https://github.com/moroshani/solar-hijri-calendar-component/issues"
   },
-  "homepage": "https://github.com/moroshani/solar-hijri-calendar-component#readme",
+  "homepage": "https://moroshani.github.io/solar-hijri-calendar-component/",
   "keywords": [
     "react",
     "calendar",
@@ -24,8 +24,14 @@
     "solar-hijri",
     "persian",
     "rtl",
-    "datepicker"
+    "datepicker",
+    "date-picker",
+    "typescript",
+    "i18n"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "sideEffects": [
     "dist/styles.css",
     "src/styles.css"

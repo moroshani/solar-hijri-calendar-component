@@ -4,7 +4,7 @@ This file describes strategic direction. Use
 [`implementation-plan.md`](./implementation-plan.md) for the active release
 sequence, work-package status, dependencies, and acceptance criteria.
 
-## Current Baseline On 2026-08-19
+## Current Baseline On 2026-08-26
 
 The current repository is a compact React package:
 
@@ -25,9 +25,9 @@ The current repository is a compact React package:
 - `playground/react`: deployed interactive testing lab with controlled month/year
   navigation and responsive browser QA.
 - Build tooling: Vite library mode, TypeScript declarations, React peer dependencies, GitHub Actions CI, CodeQL, and Pages deployment.
-- Release state: GitHub source release `v0.1.0` exists, `main` includes verified
-  dependency maintenance through `8bfafed4`, and npm publication is pending a
-  new reviewed version and tag.
+- Release state: GitHub source release `v0.1.0` exists, verified dependency
+  maintenance is current through `95291f6`, and `0.1.1` is the reviewed
+  candidate for the first npm publication.
 
 ## Recommended Package Architecture
 

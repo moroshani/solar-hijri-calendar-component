@@ -14,6 +14,7 @@ Read first:
 - Playgrounds and screenshots: ./docs/playgrounds-and-screenshots.md
 - Demo deployment: ./docs/demo-deployment.md
 - Release process: ./docs/release-process.md
+- v0.1.1 release notes: ./docs/releases/v0.1.1.md
 - Changelog: ./CHANGELOG.md
 - Contributing: ./CONTRIBUTING.md
 - Maintainers: ./MAINTAINERS.md
@@ -22,7 +23,7 @@ Read first:
 - User signals: ./docs/research/user-signals-2026-07-18.md
 - Non-Jalali feature benchmark: ./docs/research/non-jalali-feature-benchmark-2026-07-18.md
 
-Current implementation summary on 2026-08-19:
+Current implementation summary on 2026-08-26:
 
 - React inline calendar component in ./src/SolarHijriCalendar.tsx.
 - React multiple-date calendar component in ./src/SolarHijriMultipleCalendar.tsx.
@@ -38,10 +39,10 @@ Current implementation summary on 2026-08-19:
 - Interactive React testing lab in ./playground/react, deployed at https://moroshani.github.io/solar-hijri-calendar-component/.
 - Explicit lab month/year selectors exercise the controlled month API.
 - Playwright viewport QA in ./tests/playwright: 25 interaction checks and 5 responsive screenshot checks in the current gate.
-- GitHub source release v0.1.0 exists; npm publication remains pending.
-- Main includes dependency maintenance merge 8bfafed4 with a zero-vulnerability
-  audit; the first npm publication needs a new reviewed version and tag because
-  main no longer matches v0.1.0.
+- GitHub source release v0.1.0 exists; v0.1.1 is the reviewed candidate for the
+  first npm publication.
+- Pre-candidate baseline 95291f6 has green CI, CodeQL, and Demo workflows. The
+  npm package name remained available on 2026-08-26.
 
 Agent notes:
 
