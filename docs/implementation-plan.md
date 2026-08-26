@@ -141,7 +141,7 @@ Acceptance criteria:
 
 ### CORE-101: Date Validity Contract
 
-Status: `in progress` on branch `core/date-validity-contract`
+Status: `done` on 2026-08-26 in PR `#3`
 
 - Define valid year, month, and day behavior for all public helpers.
 - Add an explicit validation API and document whether invalid inputs return a
@@ -159,7 +159,7 @@ Acceptance criteria:
 
 ### CORE-102: Arithmetic And Bounds
 
-Status: `ready after CORE-101`
+Status: `ready`
 
 - Add week and year arithmetic.
 - Add reusable clamp, earlier/later, and inclusive bound helpers.
@@ -174,7 +174,7 @@ Acceptance criteria:
 
 ### CORE-103: Deterministic Clock Boundary
 
-Status: `ready after CORE-101`
+Status: `ready`
 
 - Make today-dependent behavior injectable without leaking JavaScript `Date`
   into Solar Hijri state.
@@ -189,7 +189,7 @@ Acceptance criteria:
 
 ### CORE-104: Correctness Evidence
 
-Status: `ready after CORE-101`
+Status: `ready`
 
 May proceed alongside `CORE-102` and `CORE-103` once the validity contract is
 fixed.
@@ -357,20 +357,16 @@ At the end of a work session, update this section instead of leaving progress
 only in chat.
 
 - Last audited: 2026-08-26.
-- Last completed: `REL-101B`, npm publication and registry-consumer verification.
-- Verification: the exact `v0.1.1` tag passed on 2026-08-26: clean
-  install, zero known audit vulnerabilities, TypeScript checks, 22 unit tests,
-  package and playground builds, 25 interaction tests, 5 visual captures,
-  publish dry-run, 34-file tarball inspection, clean ESM/CommonJS/TypeScript/
-  React/core/CSS tarball consumers, and diff checks. A fresh install from npm
-  repeated the consumer checks and audit successfully.
-- Hosted verification: CI, CodeQL, and Demo are green on tagged commit
-  `644085f`. npm `latest`, the annotated tag, and the GitHub release all identify
-  `0.1.1`.
-- Active package: `CORE-101` on `core/date-validity-contract`; implementation,
-  focused tests, full local verification, and clean tarball consumers pass.
-  Hosted pull-request verification remains before completion.
-- Next package: `CORE-102`, arithmetic and bounds, after `CORE-101` merges.
+- Last completed: `CORE-101`, date validity contract, in PR `#3`.
+- Verification: TypeScript checks, 48 unit tests, package and playground builds,
+  25 interaction tests, 5 visual captures, package inspection, diff checks, and
+  clean ESM/CommonJS/strict TypeScript `NodeNext`/React SSR/core/CSS tarball
+  consumers all passed on 2026-08-26.
+- Hosted verification: CI and CodeQL are green on candidate commit `4932708` in
+  PR `#3`. The published `v0.1.1` release remains unchanged at `644085f`; no
+  `0.2.0` tag or package has been created.
+- Active package: none.
+- Next package: `CORE-102`, arithmetic and bounds.
 - External blocker: none.
 - Known deferred work: core correctness, complete keyboard/focus behavior,
   headless hooks, picker surfaces, generated docs, and cross-framework packages.

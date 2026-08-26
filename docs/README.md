@@ -27,12 +27,15 @@ The project goal is to provide professional, accessible Solar Hijri / Jalali cal
   package as its GitHub Actions Trusted Publisher. The workflow runs the full
   release gate and publishes through short-lived OIDC credentials without a
   stored npm token.
-- `CORE-101` is active on `core/date-validity-contract`: runtime date/month/range
-  predicates and assertions now cover malformed values, leap days, supported
+- `CORE-101` is complete in PR `#3`: runtime date/month/range predicates and
+  assertions now cover malformed values, leap days, supported
   full-year boundaries (`-61..3176`), and invalid-input behavior across core
   entry points. The focused suite currently passes 48 tests, and a clean local
   tarball consumer passes ESM, CommonJS, strict TypeScript `NodeNext`, React
   SSR, core, and CSS checks.
+- The next work package is `CORE-102`, arithmetic and bounds. The npm and GitHub
+  release remain at `v0.1.1`; these changes are planned for `0.2.0` with later
+  roadmap work and have not been published.
 
 ## Documentation Map
 
