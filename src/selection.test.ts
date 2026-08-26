@@ -1,8 +1,11 @@
 import { describe, expect, it } from "vitest";
 import {
+  createRangePreview,
   getRangeBoundary,
   getRangeLength,
+  isCompleteRange,
   isDateDisabledByMatchers,
+  isDateMatched,
   isDateSelected,
   normalizeSelectedDates,
   isDateInRange,
@@ -60,6 +63,26 @@ describe("range selection", () => {
       to: null,
     });
   });
+
+  it("rejects invalid dates and malformed ranges", () => {
+    const invalidDate = { year: 1404, month: 12, day: 30 };
+    const malformedRange = { from: farvardin10 } as never;
+
+    expect(() => isDateInRange(invalidDate, { from: farvardin10, to: farvardin15 })).toThrow(RangeError);
+    expect(() => isCompleteRange(malformedRange)).toThrow(RangeError);
+    expect(() => orderRange({ from: invalidDate, to: farvardin15 })).toThrow(RangeError);
+    expect(() => getRangeBoundary(farvardin10, malformedRange)).toThrow(RangeError);
+    expect(() => getRangeLength(malformedRange)).toThrow(RangeError);
+    expect(() => selectRangeDate(malformedRange, farvardin12)).toThrow(RangeError);
+    expect(() => createRangePreview(malformedRange, null)).toThrow(RangeError);
+  });
+
+  it("keeps null ranges as absence rather than invalid input", () => {
+    expect(isCompleteRange(null)).toBe(false);
+    expect(isDateInRange(farvardin10, undefined)).toBe(false);
+    expect(getRangeLength(null)).toBe(0);
+    expect(createRangePreview(undefined, null)).toBeNull();
+  });
 });
 
 describe("multiple selection", () => {
@@ -80,5 +103,15 @@ describe("multiple selection", () => {
     expect(toggleSelectedDate([farvardin10, farvardin12], farvardin12, { min: 2 })).toEqual([farvardin10, farvardin12]);
     expect(toggleSelectedDate([farvardin10, farvardin12], farvardin15, { max: 2 })).toEqual([farvardin10, farvardin12]);
     expect(toggleSelectedDate([farvardin10], farvardin12, { disabled: farvardin12 })).toEqual([farvardin10]);
+  });
+
+  it("rejects invalid selected values and matcher entries before matching", () => {
+    const invalidDate = { year: 1404, month: 12, day: 30 };
+
+    expect(() => normalizeSelectedDates([farvardin10, invalidDate])).toThrow(RangeError);
+    expect(() => isDateSelected(farvardin10, [farvardin10, invalidDate])).toThrow(RangeError);
+    expect(() => toggleSelectedDate([], invalidDate)).toThrow(RangeError);
+    expect(() => isDateMatched(farvardin10, invalidDate)).toThrow(RangeError);
+    expect(() => isDateDisabledByMatchers(farvardin10, [farvardin10, invalidDate])).toThrow(RangeError);
   });
 });

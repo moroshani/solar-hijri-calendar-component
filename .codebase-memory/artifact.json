@@ -1,11 +1,11 @@
 {
-    "schema_version": 1,
-    "commit": "84cf45b0f87984e07f66c611eca7fd8e7b1f1a57",
-    "indexed_at": "2026-07-18T14:42:45Z",
-    "project": "mnt-c-Projects-solar-hijri-calendar-component",
-    "nodes": 308,
-    "edges": 473,
-    "original_size": 2031616,
-    "compressed_size": 143492,
+    "schema_version": 2,
+    "commit": "fa552997fd76ea1fb4555301ec8ae4cb7e414fa3",
+    "indexed_at": "2026-08-26T14:28:54Z",
+    "project": "solar-hijri-calendar-component",
+    "nodes": 292,
+    "edges": 606,
+    "original_size": 2097152,
+    "compressed_size": 171920,
     "compression_level": 3
 }

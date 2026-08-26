@@ -1,4 +1,5 @@
-import type { CalendarLocale, WeekStart } from "./types";
+import type { CalendarLocale, WeekStart } from "./types.js";
+import { assertValidSolarHijriMonth } from "./validation.js";
 
 export const monthNames: Record<CalendarLocale, string[]> = {
   fa: [
@@ -47,6 +48,9 @@ export const getWeekdayLabels = (locale: CalendarLocale, weekStartsOn: WeekStart
 };
 
 export const formatDay = (day: number, locale: CalendarLocale) => {
+  if (!Number.isSafeInteger(day) || day < 1 || day > 31) {
+    throw new RangeError("day must be an integer from 1 through 31");
+  }
   if (locale === "fa") {
     return new Intl.NumberFormat("fa-IR", { useGrouping: false }).format(day);
   }
@@ -54,6 +58,7 @@ export const formatDay = (day: number, locale: CalendarLocale) => {
 };
 
 export const formatMonthTitle = (year: number, month: number, locale: CalendarLocale) => {
+  assertValidSolarHijriMonth({ year, month });
   const monthName = monthNames[locale][month - 1];
   const formattedYear = locale === "fa" ? new Intl.NumberFormat("fa-IR", { useGrouping: false }).format(year) : year;
   return `${monthName} ${formattedYear}`;

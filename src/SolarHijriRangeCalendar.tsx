@@ -1,9 +1,9 @@
 import { useMemo, useState, type ReactNode } from "react";
-import { addMonths, buildCalendarDays, getToday, isSameDate } from "./calendarMath";
-import { createDateDisabledMatcher } from "./constraints";
-import { formatDay, formatMonthTitle, getWeekdayLabels } from "./labels";
-import { createRangePreview, isDateInRange, selectRangeDate, type RangeSelectionOptions } from "./selection";
-import type { CalendarDayState, CalendarLocale, SolarHijriDate, SolarHijriMonth, SolarHijriRange, WeekStart } from "./types";
+import { addMonths, buildCalendarDays, getToday, isSameDate } from "./calendarMath.js";
+import { createDateDisabledMatcher } from "./constraints.js";
+import { formatDay, formatMonthTitle, getWeekdayLabels } from "./labels.js";
+import { createRangePreview, isDateInRange, selectRangeDate, type RangeSelectionOptions } from "./selection.js";
+import type { CalendarDayState, CalendarLocale, SolarHijriDate, SolarHijriMonth, SolarHijriRange, WeekStart } from "./types.js";
 
 export type SolarHijriRangeCalendarProps = {
   value?: SolarHijriRange | null;

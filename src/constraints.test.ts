@@ -34,4 +34,13 @@ describe("date constraints", () => {
   it("reports unavailable dates without creating a matcher", () => {
     expect(isDateUnavailable(farvardin04, { minDate: farvardin10 })).toBe(true);
   });
+
+  it("rejects invalid dates, bounds, and reversed intervals", () => {
+    const invalidDate = { year: 1404, month: 12, day: 30 };
+
+    expect(() => isDateOutsideBounds(invalidDate)).toThrow(RangeError);
+    expect(() => isDateUnavailable(invalidDate)).toThrow(RangeError);
+    expect(() => createDateDisabledMatcher({ minDate: invalidDate })).toThrow(RangeError);
+    expect(() => createDateDisabledMatcher({ minDate: farvardin20, maxDate: farvardin10 })).toThrow(RangeError);
+  });
 });
