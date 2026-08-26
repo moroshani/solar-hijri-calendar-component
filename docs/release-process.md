@@ -40,9 +40,24 @@ If package code or publishable metadata must change after `v0.1.0`, bump the
 version and create a new reviewed tag instead of moving the existing tag or
 publishing a tree that does not match it.
 
-## Provenance Follow-Up
+## Trusted Publishing And Provenance
 
-After the package exists on npm, configure npm trusted publishing for this GitHub repository and add a minimal tag-triggered workflow with `id-token: write`. Do not add a long-lived npm token to GitHub unless trusted publishing is unavailable and the risk is explicitly accepted.
+Configured on 2026-08-26 for:
+
+- Package: `solar-hijri-calendar-component`
+- Provider: GitHub Actions
+- Repository: `moroshani/solar-hijri-calendar-component`
+- Workflow: `.github/workflows/publish.yml`
+- Permission: `npm publish`
+
+The tag-triggered workflow uses a GitHub-hosted runner, Node 24, and
+`id-token: write`. It repeats the release gate before publishing through
+short-lived OIDC credentials. Do not add a long-lived npm token.
+
+Version `0.1.1` was the manually authenticated initial publication and cannot
+gain provenance retroactively. The first later release published by this
+workflow is the end-to-end verification of the trusted-publisher path and will
+receive npm provenance automatically.
 
 ## Failed Publication
 

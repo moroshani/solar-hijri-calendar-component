@@ -127,16 +127,17 @@ Status: `done` on 2026-08-26 at tagged commit `644085f`
 - Repeat the ESM, CommonJS, TypeScript, React, core, and CSS checks against the
   registry artifact.
 - Publish the matching GitHub release and update installation notices.
-- Configure trusted publishing with provenance as a follow-up when available.
+- Use the configured GitHub Actions Trusted Publisher and tag-only
+  `.github/workflows/publish.yml` for future releases.
 
 Acceptance criteria:
 
 - npm, GitHub tag, GitHub release, changelog, and package metadata identify the
   same version and commit.
 - A clean machine can install and render the package from npm.
-- Registry metadata and integrity are recorded in the release notes. Trusted
-  publishing with provenance remains an explicit release-infrastructure
-  follow-up and does not require a long-lived npm token.
+- Registry metadata and integrity are recorded in the release notes. The npm
+  package is bound to `publish.yml` as its GitHub Actions Trusted Publisher;
+  future OIDC releases require no long-lived npm token and generate provenance.
 
 ### CORE-101: Date Validity Contract
 
@@ -370,5 +371,4 @@ only in chat.
 - Next package: `CORE-101`, date validity contract.
 - External blocker: none.
 - Known deferred work: core correctness, complete keyboard/focus behavior,
-  headless hooks, picker surfaces, generated docs, cross-framework packages,
-  and trusted publishing with provenance.
+  headless hooks, picker surfaces, generated docs, and cross-framework packages.

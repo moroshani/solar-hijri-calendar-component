@@ -20,6 +20,10 @@ The project goal is to provide professional, accessible Solar Hijri / Jalali cal
   passed against the package downloaded from npm, including ESM, CommonJS,
   TypeScript, React SSR, core, react, and CSS exports. CI, CodeQL, and Demo are
   green on tagged commit `644085f`; `REL-101` is complete.
+- Future `v*` tags use `.github/workflows/publish.yml`, which is bound to the npm
+  package as its GitHub Actions Trusted Publisher. The workflow runs the full
+  release gate and publishes through short-lived OIDC credentials without a
+  stored npm token.
 
 ## Documentation Map
 
