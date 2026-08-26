@@ -159,7 +159,7 @@ Acceptance criteria:
 
 ### CORE-102: Arithmetic And Bounds
 
-Status: `in progress` on branch `core/arithmetic-and-bounds`
+Status: `done` on 2026-08-26 in PR `#4`
 
 - Add week and year arithmetic.
 - Add reusable clamp, earlier/later, and inclusive bound helpers.
@@ -366,16 +366,16 @@ At the end of a work session, update this section instead of leaving progress
 only in chat.
 
 - Last audited: 2026-08-26.
-- Last completed: `CORE-101`, date validity contract, in PR `#3`.
-- Verification: TypeScript checks, 48 unit tests, package and playground builds,
+- Last completed: `CORE-102`, arithmetic and bounds, in PR `#4`.
+- Verification: TypeScript checks, 53 unit tests, package and playground builds,
   25 interaction tests, 5 visual captures, package inspection, diff checks, and
   clean ESM/CommonJS/strict TypeScript `NodeNext`/React SSR/core/CSS tarball
   consumers all passed on 2026-08-26.
-- Hosted verification: CI and CodeQL are green on candidate commit `4932708` in
-  PR `#3`. The published `v0.1.1` release remains unchanged at `644085f`; no
+- Hosted verification: CI and CodeQL are green on candidate commit `4a27434` in
+  PR `#4`. The published `v0.1.1` release remains unchanged at `644085f`; no
   `0.2.0` tag or package has been created.
-- Active package: `CORE-102` on `core/arithmetic-and-bounds`.
-- Next package: `CORE-103`, deterministic clock boundary, after `CORE-102`.
+- Active package: none.
+- Next package: `CORE-103`, deterministic clock boundary.
 - External blocker: none.
 - Known deferred work: core correctness, complete keyboard/focus behavior,
   headless hooks, picker surfaces, generated docs, and cross-framework packages.

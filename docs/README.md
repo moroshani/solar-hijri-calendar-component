@@ -33,11 +33,13 @@ The project goal is to provide professional, accessible Solar Hijri / Jalali cal
   entry points. The focused suite currently passes 48 tests, and a clean local
   tarball consumer passes ESM, CommonJS, strict TypeScript `NodeNext`, React
   SSR, core, and CSS checks.
-- `CORE-102` is active on `core/arithmetic-and-bounds`: exact week movement,
-  clamping year movement, deterministic earlier/later helpers, and inclusive
-  bound/clamp primitives are implemented with focused boundary coverage. The
-  full unit suite now contains 53 tests. The npm and GitHub release remain at
-  `v0.1.1`; these changes are planned for `0.2.0` and have not been published.
+- `CORE-102` is complete in PR `#4`: exact week movement, clamping year
+  movement, deterministic earlier/later helpers, and inclusive bound/clamp
+  primitives pass focused boundary coverage and clean package consumers. The
+  full unit suite contains 53 tests.
+- `CORE-103`, the deterministic clock boundary, is next. The npm and GitHub
+  release remain at `v0.1.1`; these changes are planned for `0.2.0` and have
+  not been published.
 
 ## Documentation Map
 
