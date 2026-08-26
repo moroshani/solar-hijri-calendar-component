@@ -39,10 +39,12 @@ Current implementation summary on 2026-08-26:
 - Interactive React testing lab in ./playground/react, deployed at https://moroshani.github.io/solar-hijri-calendar-component/.
 - Explicit lab month/year selectors exercise the controlled month API.
 - Playwright viewport QA in ./tests/playwright: 25 interaction checks and 5 responsive screenshot checks in the current gate.
-- GitHub source release v0.1.0 exists; v0.1.1 is the reviewed candidate for the
-  first npm publication.
-- Pre-candidate baseline 95291f6 has green CI, CodeQL, and Demo workflows. The
-  npm package name remained available on 2026-08-26.
+- v0.1.1 is published on npm and GitHub from annotated tag v0.1.1 at commit
+  644085f. The package URL is
+  https://www.npmjs.com/package/solar-hijri-calendar-component/v/0.1.1.
+- CI, CodeQL, and Demo are green on tagged commit 644085f. Exact-tag and clean
+  npm registry-consumer verification passed on 2026-08-26.
+- The next planned work package is CORE-101, the public date validity contract.
 
 Agent notes:
 

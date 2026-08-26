@@ -21,6 +21,9 @@ Confirm that the package contains only runtime JavaScript, TypeScript declaratio
 
 ## First npm Publication
 
+Completed on 2026-08-26 as `v0.1.1` from commit `644085f`. The following record
+is retained as the reproducible process used for the initial publication.
+
 1. Confirm the npm package name is still available.
 2. Authenticate through an applicant-controlled npm account with two-factor authentication.
 3. Create a new reviewed package version and GitHub tag. Current `main` includes

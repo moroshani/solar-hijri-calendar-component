@@ -4,14 +4,14 @@ A lightweight React calendar component for Solar Hijri / Jalali dates.
 
 [![CI](https://github.com/moroshani/solar-hijri-calendar-component/actions/workflows/ci.yml/badge.svg)](https://github.com/moroshani/solar-hijri-calendar-component/actions/workflows/ci.yml)
 [![CodeQL](https://github.com/moroshani/solar-hijri-calendar-component/actions/workflows/codeql.yml/badge.svg)](https://github.com/moroshani/solar-hijri-calendar-component/actions/workflows/codeql.yml)
+[![npm](https://img.shields.io/npm/v/solar-hijri-calendar-component.svg)](https://www.npmjs.com/package/solar-hijri-calendar-component)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](./LICENSE)
 
 The goal is to provide a practical, accessible date picker foundation for Persian and RTL applications while keeping the core API small enough to adapt inside real products.
 
-> Status: `v0.1.0` is the first GitHub source release. Version `0.1.1` is the
-> reviewed candidate for the first npm publication, and the public testing lab
-> is live. Registry availability is not claimed until publication and clean
-> registry-consumer verification finish.
+> Status: `v0.1.1` is published on npm and GitHub from commit `644085f`. The
+> public testing lab is live, and clean ESM, CommonJS, TypeScript, React, core,
+> and CSS consumers pass against the registry package.
 
 Try the responsive testing lab, including explicit month/year selectors and all
 three selection modes: https://moroshani.github.io/solar-hijri-calendar-component/
@@ -32,25 +32,11 @@ three selection modes: https://moroshani.github.io/solar-hijri-calendar-componen
 
 ## Install
 
-The npm registry still returned `404 Not Found` for this package name when
-checked on 2026-08-26, and the package is not published yet. Until the first
-registry release is announced, use a source checkout for evaluation:
-
-```bash
-git clone https://github.com/moroshani/solar-hijri-calendar-component.git
-cd solar-hijri-calendar-component
-npm ci
-npm run verify
-npm run package:check
-```
-
-After npm publication:
-
 ```bash
 npm install solar-hijri-calendar-component
 ```
 
-React is a peer dependency.
+React 18 or newer and React DOM 18 or newer are peer dependencies.
 
 ## Usage
 

@@ -25,9 +25,8 @@ The current repository is a compact React package:
 - `playground/react`: deployed interactive testing lab with controlled month/year
   navigation and responsive browser QA.
 - Build tooling: Vite library mode, TypeScript declarations, React peer dependencies, GitHub Actions CI, CodeQL, and Pages deployment.
-- Release state: GitHub source release `v0.1.0` exists, verified dependency
-  maintenance is current through `95291f6`, and `0.1.1` is the reviewed
-  candidate for the first npm publication.
+- Release state: `v0.1.1` is published on npm and GitHub from tagged commit
+  `644085f`; exact-tag and clean registry-consumer verification passed.
 
 ## Recommended Package Architecture
 
@@ -88,7 +87,7 @@ Expose Gregorian and ISO conversions as adapters, not as the internal source of 
 - [x] Publish GitHub source release `v0.1.0`.
 - [x] Deploy and verify the public GitHub Pages testing lab.
 - [x] Repair the post-release grouped dependency update and restore a clean audit.
-- [ ] Create a new reviewed version/tag, publish it to npm, and verify a clean
+- [x] Create a new reviewed version/tag, publish it to npm, and verify a clean
   consumer installation from the registry.
 - [x] Keep CI and the public demo passing after the source release.
 
@@ -151,14 +150,12 @@ Expose Gregorian and ISO conversions as adapters, not as the internal source of 
 
 ## Recommended Next Sequence
 
-1. Decide the first npm release boundary, bump from `0.1.0`, create a matching
-   reviewed tag, publish, and run clean consumer smoke tests.
-2. Finish date validation and boundary/property fixtures before broadening the
+1. Finish date validation and boundary/property fixtures before broadening the
    component surface.
-3. Implement the WAI-ARIA keyboard/focus model and prove it in Playwright.
-4. Extract headless React hooks, then add date/range/month/year picker surfaces.
-5. Build generated documentation around the stabilized API.
-6. Start cross-framework packages only after the core and accessibility
+2. Implement the WAI-ARIA keyboard/focus model and prove it in Playwright.
+3. Extract headless React hooks, then add date/range/month/year picker surfaces.
+4. Build generated documentation around the stabilized API.
+5. Start cross-framework packages only after the core and accessibility
    contracts have held through real use.
 
 ## Testing Strategy

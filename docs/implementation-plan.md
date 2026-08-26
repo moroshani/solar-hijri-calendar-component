@@ -4,9 +4,9 @@ Status: active
 
 Baseline audited: 2026-08-26
 
-Code baseline: `7fe0721` (`0.1.1` release candidate)
+Code baseline: `644085f` (`v0.1.1` tagged release)
 
-Next work package: `REL-101B`
+Next work package: `CORE-101`
 
 This document turns the strategic roadmap into ordered, testable work. It is the
 execution source of truth for maintainers and coding agents. Update it whenever
@@ -36,12 +36,14 @@ The repository currently provides:
   and responsive component styles.
 - 22 Vitest checks, 25 Playwright interaction checks, 5 visual captures, and
   ESM/CommonJS/TypeScript/React/CSS consumer verification.
-- A live GitHub Pages testing lab and GitHub source release `v0.1.0`.
-- A verified package tarball, but no npm registry publication.
+- A live GitHub Pages testing lab and matching GitHub release `v0.1.1`.
+- A verified npm package at
+  `solar-hijri-calendar-component@0.1.1`, installed and tested from the public
+  registry in a clean consumer project.
 
-The package name returned `404 Not Found` from npm on 2026-08-26. Current
-`main` differs from `v0.1.0`, so it must never be published to npm as version
-`0.1.0`.
+The first registry package was published on 2026-08-26 from annotated tag
+`v0.1.1` at commit `644085f`. Version `0.1.0` remains the earlier source-only
+GitHub release and must never be reused for a different tree.
 
 ## Release Map
 
@@ -88,7 +90,7 @@ Statuses: `next`, `ready`, `blocked`, `in progress`, or `done`.
 
 ### REL-101: First npm Publication
 
-Status: `in progress`
+Status: `done` on 2026-08-26
 
 Target: `0.1.1`
 
@@ -117,11 +119,7 @@ Acceptance criteria:
 
 #### REL-101B: Registry Publication
 
-Status: `blocked` by maintainer-controlled npm authentication and 2FA
-
-Owner action required: the maintainer must control an npm account with 2FA and
-complete any interactive authentication. Credentials never enter chat, Git, or
-project documentation.
+Status: `done` on 2026-08-26 at tagged commit `644085f`
 
 - Create signed or annotated tag `v0.1.1` at the reviewed candidate.
 - Publish from a clean worktree at that tag.
@@ -136,11 +134,13 @@ Acceptance criteria:
 - npm, GitHub tag, GitHub release, changelog, and package metadata identify the
   same version and commit.
 - A clean machine can install and render the package from npm.
-- Registry metadata and provenance are recorded in the release notes.
+- Registry metadata and integrity are recorded in the release notes. Trusted
+  publishing with provenance remains an explicit release-infrastructure
+  follow-up and does not require a long-lived npm token.
 
 ### CORE-101: Date Validity Contract
 
-Status: `ready after REL-101`
+Status: `next`
 
 - Define valid year, month, and day behavior for all public helpers.
 - Add an explicit validation API and document whether invalid inputs return a
@@ -356,19 +356,19 @@ At the end of a work session, update this section instead of leaving progress
 only in chat.
 
 - Last audited: 2026-08-26.
-- Last completed: `REL-101A`, release audit and `0.1.1` candidate preparation.
-- Verification: the local `0.1.1` candidate gate passed on 2026-08-26: clean
+- Last completed: `REL-101B`, npm publication and registry-consumer verification.
+- Verification: the exact `v0.1.1` tag passed on 2026-08-26: clean
   install, zero known audit vulnerabilities, TypeScript checks, 22 unit tests,
   package and playground builds, 25 interaction tests, 5 visual captures,
   publish dry-run, 34-file tarball inspection, clean ESM/CommonJS/TypeScript/
-  React/core/CSS consumers, and diff checks.
-- Hosted verification: CI, CodeQL, and Demo are green on candidate commit
-  `7fe0721`. This closeout changes only documentation excluded from the package
-  payload.
-- Active package: none while `REL-101B` is externally blocked.
-- Next package: `REL-101B` registry publication after maintainer npm login and
-  2FA.
-- External blocker: `REL-101B` requires maintainer-controlled npm authentication
-  and 2FA.
+  React/core/CSS tarball consumers, and diff checks. A fresh install from npm
+  repeated the consumer checks and audit successfully.
+- Hosted verification: CI, CodeQL, and Demo are green on tagged commit
+  `644085f`. npm `latest`, the annotated tag, and the GitHub release all identify
+  `0.1.1`.
+- Active package: none; `CORE-101` is ready to start.
+- Next package: `CORE-101`, date validity contract.
+- External blocker: none.
 - Known deferred work: core correctness, complete keyboard/focus behavior,
-  headless hooks, picker surfaces, generated docs, and cross-framework packages.
+  headless hooks, picker surfaces, generated docs, cross-framework packages,
+  and trusted publishing with provenance.
