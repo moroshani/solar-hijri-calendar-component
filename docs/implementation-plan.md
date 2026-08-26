@@ -4,9 +4,10 @@ Status: active
 
 Baseline audited: 2026-08-26
 
-Code baseline: `644085f` (`v0.1.1` tagged release)
+Code baseline: `0861be1` (`main` after `CORE-102`; published release remains
+`v0.1.1` at `644085f`)
 
-Next work package: `CORE-101`
+Next work package: `CORE-103`
 
 This document turns the strategic roadmap into ordered, testable work. It is the
 execution source of truth for maintainers and coding agents. Update it whenever
@@ -34,7 +35,7 @@ The repository currently provides:
 - Controlled React calendars for single, range, and multiple selection.
 - Persian and English labels, RTL presentation, explicit month/year navigation,
   and responsive component styles.
-- 22 Vitest checks, 25 Playwright interaction checks, 5 visual captures, and
+- 53 Vitest checks, 25 Playwright interaction checks, 5 visual captures, and
   ESM/CommonJS/TypeScript/React/CSS consumer verification.
 - A live GitHub Pages testing lab and matching GitHub release `v0.1.1`.
 - A verified npm package at
