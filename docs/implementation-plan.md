@@ -4,9 +4,9 @@ Status: active
 
 Baseline audited: 2026-08-26
 
-Code baseline: `95291f6` (pre-candidate base)
+Code baseline: `7fe0721` (`0.1.1` release candidate)
 
-Next work package: `REL-101A`
+Next work package: `REL-101B`
 
 This document turns the strategic roadmap into ordered, testable work. It is the
 execution source of truth for maintainers and coding agents. Update it whenever
@@ -96,6 +96,8 @@ Scope rule: release the current foundation; do not add new component APIs.
 
 #### REL-101A: Release Audit And Candidate
 
+Status: `done` on 2026-08-26 at candidate commit `7fe0721`
+
 - Confirm the package name immediately before publication.
 - Review all runtime exports, peer dependencies, metadata, README installation
   text, license, and packed files.
@@ -114,6 +116,8 @@ Acceptance criteria:
   selected for publication.
 
 #### REL-101B: Registry Publication
+
+Status: `blocked` by maintainer-controlled npm authentication and 2FA
 
 Owner action required: the maintainer must control an npm account with 2FA and
 complete any interactive authentication. Credentials never enter chat, Git, or
@@ -352,17 +356,18 @@ At the end of a work session, update this section instead of leaving progress
 only in chat.
 
 - Last audited: 2026-08-26.
-- Last completed: `PLAN-001`, roadmap reconciliation and this execution plan.
+- Last completed: `REL-101A`, release audit and `0.1.1` candidate preparation.
 - Verification: the local `0.1.1` candidate gate passed on 2026-08-26: clean
   install, zero known audit vulnerabilities, TypeScript checks, 22 unit tests,
   package and playground builds, 25 interaction tests, 5 visual captures,
   publish dry-run, 34-file tarball inspection, clean ESM/CommonJS/TypeScript/
   React/core/CSS consumers, and diff checks.
-- Live pre-candidate state: CI, CodeQL, and Demo are green on `95291f6`; the npm
-  package name was still available on 2026-08-26.
-- Active package: `REL-101A`, awaiting the candidate commit and green hosted
-  workflows on that exact commit.
-- Next package: `REL-101B` registry publication after the candidate is green.
+- Hosted verification: CI, CodeQL, and Demo are green on candidate commit
+  `7fe0721`. This closeout changes only documentation excluded from the package
+  payload.
+- Active package: none while `REL-101B` is externally blocked.
+- Next package: `REL-101B` registry publication after maintainer npm login and
+  2FA.
 - External blocker: `REL-101B` requires maintainer-controlled npm authentication
   and 2FA.
 - Known deferred work: core correctness, complete keyboard/focus behavior,

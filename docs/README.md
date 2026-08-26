@@ -14,7 +14,7 @@ The project goal is to provide professional, accessible Solar Hijri / Jalali cal
   unit tests, library and lab builds, 25 responsive Playwright interaction
   checks, 5 visual captures, npm publish dry-run, tarball inspection, and clean
   ESM, CommonJS, TypeScript, React, core, and CSS consumers. CI, CodeQL, and Demo
-  must still pass on the candidate commit before `REL-101A` is complete.
+  are green on candidate commit `7fe0721`; `REL-101A` is complete.
 
 ## Documentation Map
 
