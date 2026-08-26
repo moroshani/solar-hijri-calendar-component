@@ -98,6 +98,51 @@ Key props:
 - `RangeSelectionOptions`: options for pure range selection.
 - `MultipleSelectionOptions`: options for pure multiple-date selection.
 
+## Validity Contract
+
+Supported Solar Hijri years are `-61` through `3176`, inclusive. Every date in
+that full-year range is supported by validation, Gregorian conversion, and
+date arithmetic. A valid value has safe-integer fields, a month from `1`
+through `12`, and a real day for that month and year. Leap-day validity is
+checked against the actual Esfand length.
+
+Use these framework-neutral exports at runtime boundaries:
+
+- `MIN_SOLAR_HIJRI_YEAR`
+- `MAX_SOLAR_HIJRI_YEAR`
+- `isValidSolarHijriDate(value)`
+- `isValidSolarHijriMonth(value)`
+- `isValidSolarHijriRange(value)`
+- `assertValidSolarHijriDate(value, label?)`
+- `assertValidSolarHijriMonth(value, label?)`
+- `assertValidSolarHijriRange(value, label?)`
+
+The three `isValid*` predicates accept `unknown`, return `false` for malformed,
+impossible, fractional, non-finite, or out-of-range values, and narrow valid
+values to their public TypeScript type. The three `assertValid*` functions
+narrow valid values and otherwise throw `RangeError`.
+
+All other public date math, conversion, constraint, and selection helpers throw
+`RangeError` when a supplied date, month, or range is invalid. Details:
+
+- `null` and `undefined` remain absence only for signatures that explicitly
+  permit them, such as nullable ranges and optional selected dates.
+- A present range must contain both `from` and `to` keys; each boundary must be
+  a valid date or `null`.
+- `fromGregorianDate` rejects invalid JavaScript dates and Gregorian dates that
+  convert outside the supported Solar Hijri years.
+- Day and month movement deltas must be safe integers, and movement that leaves
+  the supported years throws.
+- Constraint bounds must be valid and `minDate` must not be after `maxDate`.
+- Date arrays and matcher collections are validated completely before matching,
+  so an early match cannot hide a later invalid value.
+- `formatDay` accepts integer day labels from `1` through `31`, and
+  `formatMonthTitle` requires a valid supported month.
+
+This is a deliberate pre-1.0 contract tightening targeted at `0.2.0`. Results
+for valid values remain backward compatible; code that relied on malformed
+values being formatted, sorted, or normalized must validate first.
+
 ## Date Math
 
 - `dateKey(date)`

@@ -7,7 +7,17 @@ export type {
   SolarHijriRange,
   SolarHijriSelectionMode,
   WeekStart,
-} from "./types";
+} from "./types.js";
+export {
+  assertValidSolarHijriDate,
+  assertValidSolarHijriMonth,
+  assertValidSolarHijriRange,
+  isValidSolarHijriDate,
+  isValidSolarHijriMonth,
+  isValidSolarHijriRange,
+  MAX_SOLAR_HIJRI_YEAR,
+  MIN_SOLAR_HIJRI_YEAR,
+} from "./validation.js";
 export {
   addDays,
   addMonths,
@@ -23,10 +33,10 @@ export {
   isSameDate,
   toGregorianDate,
   toIsoDate,
-} from "./calendarMath";
-export { createDateDisabledMatcher, isDateOutsideBounds, isDateUnavailable } from "./constraints";
-export type { DateBounds, DateConstraintOptions } from "./constraints";
-export { formatDay, formatMonthTitle, getWeekdayLabels, monthNames } from "./labels";
+} from "./calendarMath.js";
+export { createDateDisabledMatcher, isDateOutsideBounds, isDateUnavailable } from "./constraints.js";
+export type { DateBounds, DateConstraintOptions } from "./constraints.js";
+export { formatDay, formatMonthTitle, getWeekdayLabels, monthNames } from "./labels.js";
 export {
   createRangePreview,
   emptyRange,
@@ -42,5 +52,5 @@ export {
   rangeContainsDisabledDate,
   selectRangeDate,
   toggleSelectedDate,
-} from "./selection";
-export type { DateMatcher, MultipleSelectionOptions, RangeBoundary, RangeSelectionOptions } from "./selection";
+} from "./selection.js";
+export type { DateMatcher, MultipleSelectionOptions, RangeBoundary, RangeSelectionOptions } from "./selection.js";

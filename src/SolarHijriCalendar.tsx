@@ -1,8 +1,8 @@
 import { useMemo, useState } from "react";
-import { addMonths, buildCalendarDays, getToday } from "./calendarMath";
-import { createDateDisabledMatcher } from "./constraints";
-import { formatDay, formatMonthTitle, getWeekdayLabels } from "./labels";
-import type { CalendarDay, CalendarLocale, SolarHijriDate, SolarHijriMonth, WeekStart } from "./types";
+import { addMonths, buildCalendarDays, getToday } from "./calendarMath.js";
+import { createDateDisabledMatcher } from "./constraints.js";
+import { formatDay, formatMonthTitle, getWeekdayLabels } from "./labels.js";
+import type { CalendarDay, CalendarLocale, SolarHijriDate, SolarHijriMonth, WeekStart } from "./types.js";
 import type { ReactNode } from "react";
 import "./styles.css";
 

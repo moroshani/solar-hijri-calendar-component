@@ -7,7 +7,10 @@ The project goal is to provide professional, accessible Solar Hijri / Jalali cal
 ## Current Status
 
 - Repository baseline date: 2026-08-26.
-- Current implementation: React single, range, and multiple calendar components; framework-neutral date math, constraints, and selection entry points; Persian/English labels; CSS; Vitest coverage; Vite library packaging; and an interactive React testing lab.
+- Current implementation: React single, range, and multiple calendar components;
+  framework-neutral validation, date math, constraints, and selection entry
+  points; Persian/English labels; CSS; Vitest coverage; Vite library packaging;
+  and an interactive React testing lab.
 - Current package state: `v0.1.1` is published on
   [npm](https://www.npmjs.com/package/solar-hijri-calendar-component/v/0.1.1)
   and as a [GitHub release](https://github.com/moroshani/solar-hijri-calendar-component/releases/tag/v0.1.1)
@@ -24,6 +27,12 @@ The project goal is to provide professional, accessible Solar Hijri / Jalali cal
   package as its GitHub Actions Trusted Publisher. The workflow runs the full
   release gate and publishes through short-lived OIDC credentials without a
   stored npm token.
+- `CORE-101` is active on `core/date-validity-contract`: runtime date/month/range
+  predicates and assertions now cover malformed values, leap days, supported
+  full-year boundaries (`-61..3176`), and invalid-input behavior across core
+  entry points. The focused suite currently passes 48 tests, and a clean local
+  tarball consumer passes ESM, CommonJS, strict TypeScript `NodeNext`, React
+  SSR, core, and CSS checks.
 
 ## Documentation Map
 

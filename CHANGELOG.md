@@ -6,6 +6,27 @@ The project follows semantic versioning after `1.0.0`. Pre-1.0 releases may refi
 
 ## [Unreleased]
 
+### Added
+
+- Added public date, month, and range validation predicates and assertion APIs,
+  plus explicit `-61..3176` full-year support constants.
+
+### Changed
+
+- Defined one invalid-input contract across date math, conversion, grids,
+  constraints, selections, and date labels: validation predicates return
+  `false`; other helpers throw `RangeError` for supplied invalid values.
+- Validated complete date and matcher collections before evaluation, rejected
+  reversed min/max bounds, and preserved `null`/`undefined` only as documented
+  absence.
+- Corrected negative-year month arithmetic and rejected fractional or
+  out-of-range movement instead of relying on JavaScript normalization.
+- Emitted ESM-compatible `.js` specifiers in declarations so strict TypeScript
+  `NodeNext` consumers can resolve every public entry point.
+
+These invalid-input changes are a deliberate pre-1.0 behavior tightening for
+the planned `0.2.0` release. Existing valid-date results remain compatible.
+
 ## [0.1.1] - 2026-08-26
 
 ### Added

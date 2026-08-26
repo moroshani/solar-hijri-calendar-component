@@ -141,7 +141,7 @@ Acceptance criteria:
 
 ### CORE-101: Date Validity Contract
 
-Status: `next`
+Status: `in progress` on branch `core/date-validity-contract`
 
 - Define valid year, month, and day behavior for all public helpers.
 - Add an explicit validation API and document whether invalid inputs return a
@@ -367,8 +367,10 @@ only in chat.
 - Hosted verification: CI, CodeQL, and Demo are green on tagged commit
   `644085f`. npm `latest`, the annotated tag, and the GitHub release all identify
   `0.1.1`.
-- Active package: none; `CORE-101` is ready to start.
-- Next package: `CORE-101`, date validity contract.
+- Active package: `CORE-101` on `core/date-validity-contract`; implementation,
+  focused tests, full local verification, and clean tarball consumers pass.
+  Hosted pull-request verification remains before completion.
+- Next package: `CORE-102`, arithmetic and bounds, after `CORE-101` merges.
 - External blocker: none.
 - Known deferred work: core correctness, complete keyboard/focus behavior,
   headless hooks, picker surfaces, generated docs, and cross-framework packages.

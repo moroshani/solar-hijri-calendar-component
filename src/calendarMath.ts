@@ -1,36 +1,68 @@
 import jalaali from "jalaali-js";
-import type { CalendarDay, SolarHijriDate, SolarHijriMonth, WeekStart } from "./types";
+import type { CalendarDay, SolarHijriDate, SolarHijriMonth, WeekStart } from "./types.js";
+import { assertValidSolarHijriDate, assertValidSolarHijriMonth } from "./validation.js";
 
 const pad = (value: number) => String(value).padStart(2, "0");
 
-export const dateKey = (date: SolarHijriDate) => `${date.year}-${pad(date.month)}-${pad(date.day)}`;
+const assertSafeInteger = (value: number, label: string) => {
+  if (!Number.isSafeInteger(value)) throw new RangeError(`${label} must be a safe integer`);
+};
+
+const assertWeekStart = (weekStartsOn: WeekStart) => {
+  if (weekStartsOn !== "saturday" && weekStartsOn !== "sunday") {
+    throw new RangeError('weekStartsOn must be "saturday" or "sunday"');
+  }
+};
+
+export const dateKey = (date: SolarHijriDate) => {
+  assertValidSolarHijriDate(date);
+  return `${date.year}-${pad(date.month)}-${pad(date.day)}`;
+};
 
 export const isSameDate = (left: SolarHijriDate | null | undefined, right: SolarHijriDate | null | undefined) => {
+  if (left !== null && left !== undefined) assertValidSolarHijriDate(left, "left");
+  if (right !== null && right !== undefined) assertValidSolarHijriDate(right, "right");
   return Boolean(left && right && left.year === right.year && left.month === right.month && left.day === right.day);
 };
 
 export const getToday = (): SolarHijriDate => {
   const now = new Date();
   const today = jalaali.toJalaali(now.getFullYear(), now.getMonth() + 1, now.getDate());
-  return { year: today.jy, month: today.jm, day: today.jd };
+  const result = { year: today.jy, month: today.jm, day: today.jd };
+  assertValidSolarHijriDate(result, "today");
+  return result;
 };
 
 export const toGregorianDate = (date: SolarHijriDate) => {
+  assertValidSolarHijriDate(date);
   const gregorian = jalaali.toGregorian(date.year, date.month, date.day);
   return new Date(Date.UTC(gregorian.gy, gregorian.gm - 1, gregorian.gd));
 };
 
 export const fromGregorianDate = (date: Date): SolarHijriDate => {
-  const jalali = jalaali.toJalaali(date.getUTCFullYear(), date.getUTCMonth() + 1, date.getUTCDate());
-  return { year: jalali.jy, month: jalali.jm, day: jalali.jd };
+  if (!(date instanceof Date) || Number.isNaN(date.getTime())) {
+    throw new RangeError("date must be a valid JavaScript Date");
+  }
+
+  try {
+    const jalali = jalaali.toJalaali(date.getUTCFullYear(), date.getUTCMonth() + 1, date.getUTCDate());
+    const result = { year: jalali.jy, month: jalali.jm, day: jalali.jd };
+    assertValidSolarHijriDate(result, "converted date");
+    return result;
+  } catch {
+    throw new RangeError("date must convert into the supported Solar Hijri year range");
+  }
 };
 
 export const toIsoDate = (date: SolarHijriDate) => {
+  assertValidSolarHijriDate(date);
   const gregorian = jalaali.toGregorian(date.year, date.month, date.day);
   return `${gregorian.gy}-${pad(gregorian.gm)}-${pad(gregorian.gd)}`;
 };
 
 export const compareDates = (left: SolarHijriDate, right: SolarHijriDate) => {
+  assertValidSolarHijriDate(left, "left");
+  assertValidSolarHijriDate(right, "right");
   if (left.year !== right.year) return left.year - right.year;
   if (left.month !== right.month) return left.month - right.month;
   return left.day - right.day;
@@ -41,22 +73,31 @@ export const isBeforeDate = (left: SolarHijriDate, right: SolarHijriDate) => com
 export const isAfterDate = (left: SolarHijriDate, right: SolarHijriDate) => compareDates(left, right) > 0;
 
 export const addDays = (date: SolarHijriDate, delta: number): SolarHijriDate => {
+  assertValidSolarHijriDate(date);
+  assertSafeInteger(delta, "delta");
   const gregorian = toGregorianDate(date);
   gregorian.setUTCDate(gregorian.getUTCDate() + delta);
   return fromGregorianDate(gregorian);
 };
 
 export const differenceInCalendarDays = (left: SolarHijriDate, right: SolarHijriDate) => {
+  assertValidSolarHijriDate(left, "left");
+  assertValidSolarHijriDate(right, "right");
   const dayMs = 24 * 60 * 60 * 1000;
   return Math.round((toGregorianDate(left).getTime() - toGregorianDate(right).getTime()) / dayMs);
 };
 
 export const addMonths = (month: SolarHijriMonth, delta: number): SolarHijriMonth => {
+  assertValidSolarHijriMonth(month);
+  assertSafeInteger(delta, "delta");
   const zeroBased = month.year * 12 + (month.month - 1) + delta;
-  return {
+  if (!Number.isSafeInteger(zeroBased)) throw new RangeError("resulting month is outside the supported range");
+  const result = {
     year: Math.floor(zeroBased / 12),
-    month: (zeroBased % 12) + 1,
+    month: ((zeroBased % 12) + 12) % 12 + 1,
   };
+  assertValidSolarHijriMonth(result, "resulting month");
+  return result;
 };
 
 const normalizeWeekday = (date: SolarHijriDate, weekStartsOn: WeekStart) => {
@@ -65,7 +106,10 @@ const normalizeWeekday = (date: SolarHijriDate, weekStartsOn: WeekStart) => {
   return (weekday + 1) % 7;
 };
 
-export const getMonthLength = (month: SolarHijriMonth) => jalaali.jalaaliMonthLength(month.year, month.month);
+export const getMonthLength = (month: SolarHijriMonth) => {
+  assertValidSolarHijriMonth(month);
+  return jalaali.jalaaliMonthLength(month.year, month.month);
+};
 
 export const buildCalendarDays = (
   visibleMonth: SolarHijriMonth,
@@ -73,6 +117,9 @@ export const buildCalendarDays = (
   isDateDisabled: ((date: SolarHijriDate) => boolean) | undefined,
   weekStartsOn: WeekStart,
 ): CalendarDay[] => {
+  assertValidSolarHijriMonth(visibleMonth, "visibleMonth");
+  if (selectedDate !== null) assertValidSolarHijriDate(selectedDate, "selectedDate");
+  assertWeekStart(weekStartsOn);
   const today = getToday();
   const firstDayOffset = normalizeWeekday({ ...visibleMonth, day: 1 }, weekStartsOn);
   const previousMonth = addMonths(visibleMonth, -1);

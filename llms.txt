@@ -29,13 +29,14 @@ Current implementation summary on 2026-08-26:
 - React multiple-date calendar component in ./src/SolarHijriMultipleCalendar.tsx.
 - React range calendar component in ./src/SolarHijriRangeCalendar.tsx.
 - Date math and grid generation in ./src/calendarMath.ts.
+- Runtime date, month, and range validation in ./src/validation.ts.
 - Date bounds and disabled matcher composition in ./src/constraints.ts.
 - Range, multiple selection, and matcher helpers in ./src/selection.ts.
 - Public types in ./src/types.ts.
 - Locale labels in ./src/labels.ts.
 - Styles in ./src/styles.css.
-- Unit tests in ./src/calendarMath.test.ts, ./src/constraints.test.ts, and
-  ./src/selection.test.ts.
+- Unit tests in ./src/calendarMath.test.ts, ./src/constraints.test.ts,
+  ./src/labels.test.ts, ./src/selection.test.ts, and ./src/validation.test.ts.
 - Interactive React testing lab in ./playground/react, deployed at https://moroshani.github.io/solar-hijri-calendar-component/.
 - Explicit lab month/year selectors exercise the controlled month API.
 - Playwright viewport QA in ./tests/playwright: 25 interaction checks and 5 responsive screenshot checks in the current gate.
@@ -47,7 +48,12 @@ Current implementation summary on 2026-08-26:
 - The npm package is bound to .github/workflows/publish.yml as a GitHub Actions
   Trusted Publisher. Future v* tags run the full release gate and publish via
   OIDC without a stored npm token.
-- The next planned work package is CORE-101, the public date validity contract.
+- CORE-101 is active on core/date-validity-contract. Validation predicates
+  return false for invalid unknown values; other public date/month/range entry
+  points throw RangeError for invalid supplied values. Supported years are
+  -61 through 3176. The focused suite passes 48 tests, and a clean tarball
+  consumer passes ESM, CommonJS, strict TypeScript NodeNext, React SSR, core,
+  and CSS checks.
 
 Agent notes:
 

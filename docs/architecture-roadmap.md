@@ -97,9 +97,11 @@ Expose Gregorian and ISO conversions as adapters, not as the internal source of 
 - [x] Add comparison, conversion, day/month arithmetic, difference, month-length,
   and calendar-grid helpers.
 - [x] Add range, multiple, disabled matcher, and shared min/max constraint engines.
-- [ ] Complete date arithmetic and validation beyond the current compare,
-  conversion, add-day/add-month, and difference helpers: validation, clamp,
-  min/max, week/year arithmetic, and explicit invalid-date behavior remain.
+- [x] Define explicit date, month, and range validity for all public core entry
+  points, including leap days, malformed values, and supported-year boundaries.
+- [ ] Complete date arithmetic beyond the current compare, conversion,
+  add-day/add-month, and difference helpers: clamp, min/max, and week/year
+  arithmetic remain.
 - [ ] Add deterministic today/timezone injection for tests.
 - [ ] Add broad conversion fixtures, including leap years and boundary cases.
 - [ ] Add property-style tests for round-trip conversion and grid invariants.

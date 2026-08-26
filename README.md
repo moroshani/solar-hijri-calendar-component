@@ -25,6 +25,7 @@ three selection modes: https://moroshani.github.io/solar-hijri-calendar-componen
 - Controlled range selection.
 - Controlled multiple-date selection.
 - Direct Solar Hijri month and year navigation through the controlled `month` API.
+- Explicit runtime validation for dates, months, ranges, and supported years.
 - Disabled-date support.
 - Custom day rendering and day class hooks.
 - Keyboard-accessible buttons.
@@ -96,6 +97,28 @@ Core-only imports are available for framework-neutral logic:
 ```ts
 import { dateKey, selectRangeDate } from "solar-hijri-calendar-component/core";
 ```
+
+Validate untrusted or deserialized values before using them:
+
+```ts
+import {
+  assertValidSolarHijriDate,
+  isValidSolarHijriDate,
+} from "solar-hijri-calendar-component/core";
+
+if (isValidSolarHijriDate(input)) {
+  // input is narrowed to SolarHijriDate
+}
+
+assertValidSolarHijriDate(input); // narrows or throws RangeError
+```
+
+Supported Solar Hijri years are `-61` through `3176`. This full-year range is
+guaranteed across validation, Gregorian conversion, and date arithmetic.
+Validation predicates return `false` for malformed or impossible values. Other
+public helpers throw `RangeError` when a supplied date, month, or range is
+invalid; `null` and `undefined` remain absence only where the signature
+explicitly permits them.
 
 ## API
 
@@ -181,7 +204,7 @@ npm run screenshots
 The current package exposes framework-neutral date, constraint, and selection
 helpers plus controlled React calendars for single, range, and multiple
 selection. The next product work is deeper correctness coverage, complete
-keyboard/focus behavior, headless picker APIs, and the first registry release.
+keyboard/focus behavior, headless picker APIs, and production picker surfaces.
 Cross-framework packages remain later milestones after the core API is stable.
 
 Research and planning docs:
