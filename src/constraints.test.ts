@@ -1,5 +1,11 @@
 import { describe, expect, it } from "vitest";
-import { createDateDisabledMatcher, isDateOutsideBounds, isDateUnavailable } from "./constraints";
+import {
+  clampDate,
+  createDateDisabledMatcher,
+  isDateOutsideBounds,
+  isDateUnavailable,
+  isDateWithinBounds,
+} from "./constraints";
 
 const farvardin04 = { year: 1403, month: 1, day: 4 };
 const farvardin10 = { year: 1403, month: 1, day: 10 };
@@ -13,6 +19,20 @@ describe("date constraints", () => {
     expect(isDateOutsideBounds(farvardin10, bounds)).toBe(false);
     expect(isDateOutsideBounds(farvardin20, bounds)).toBe(false);
     expect(isDateOutsideBounds({ year: 1403, month: 1, day: 21 }, bounds)).toBe(true);
+    expect(isDateWithinBounds(farvardin10, bounds)).toBe(true);
+    expect(isDateWithinBounds(farvardin20, bounds)).toBe(true);
+    expect(isDateWithinBounds(farvardin04, bounds)).toBe(false);
+  });
+
+  it("clamps dates to inclusive one-sided and two-sided bounds", () => {
+    const bounds = { minDate: farvardin10, maxDate: farvardin20 };
+
+    expect(clampDate(farvardin04, bounds)).toBe(farvardin10);
+    expect(clampDate({ year: 1403, month: 1, day: 21 }, bounds)).toBe(farvardin20);
+    expect(clampDate(farvardin10, bounds)).toBe(farvardin10);
+    expect(clampDate(farvardin20, bounds)).toBe(farvardin20);
+    expect(clampDate(farvardin04, { maxDate: farvardin20 })).toBe(farvardin04);
+    expect(clampDate(farvardin20)).toBe(farvardin20);
   });
 
   it("combines bounds with custom disabled rules", () => {
@@ -39,8 +59,11 @@ describe("date constraints", () => {
     const invalidDate = { year: 1404, month: 12, day: 30 };
 
     expect(() => isDateOutsideBounds(invalidDate)).toThrow(RangeError);
+    expect(() => isDateWithinBounds(invalidDate)).toThrow(RangeError);
+    expect(() => clampDate(invalidDate)).toThrow(RangeError);
     expect(() => isDateUnavailable(invalidDate)).toThrow(RangeError);
     expect(() => createDateDisabledMatcher({ minDate: invalidDate })).toThrow(RangeError);
     expect(() => createDateDisabledMatcher({ minDate: farvardin20, maxDate: farvardin10 })).toThrow(RangeError);
+    expect(() => clampDate(farvardin10, { minDate: farvardin20, maxDate: farvardin10 })).toThrow(RangeError);
   });
 });

@@ -10,6 +10,8 @@ The project follows semantic versioning after `1.0.0`. Pre-1.0 releases may refi
 
 - Added public date, month, and range validation predicates and assertion APIs,
   plus explicit `-61..3176` full-year support constants.
+- Added exact week movement, clamping year movement, earlier/later selection,
+  inclusive bound checks, and reusable date clamping helpers.
 
 ### Changed
 
@@ -23,6 +25,8 @@ The project follows semantic versioning after `1.0.0`. Pre-1.0 releases may refi
   out-of-range movement instead of relying on JavaScript normalization.
 - Emitted ESM-compatible `.js` specifiers in declarations so strict TypeScript
   `NodeNext` consumers can resolve every public entry point.
+- Defined symmetric positive/negative year movement: preserve month and day
+  when valid, otherwise clamp to the target month's final real day.
 
 These invalid-input changes are a deliberate pre-1.0 behavior tightening for
 the planned `0.2.0` release. Existing valid-date results remain compatible.

@@ -54,8 +54,12 @@ Current implementation summary on 2026-08-26:
   -61 through 3176. The focused suite passes 48 tests, and a clean tarball
   consumer passes ESM, CommonJS, strict TypeScript NodeNext, React SSR, core,
   and CSS checks.
-- CORE-102, arithmetic and bounds, is the next work package. The published
-  package and GitHub release remain at v0.1.1; no 0.2.0 release exists yet.
+- CORE-102 is complete in PR #4. It adds exact week movement,
+  clamping year movement, deterministic earlier/later helpers, and inclusive
+  bound/clamp primitives. The full unit suite contains 53 tests, and clean
+  package consumers pass.
+- CORE-103, the deterministic clock boundary, is next. The published package
+  and GitHub release remain at v0.1.1; no 0.2.0 release exists yet.
 
 Agent notes:
 

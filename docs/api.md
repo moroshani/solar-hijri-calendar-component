@@ -150,8 +150,12 @@ values being formatted, sorted, or normalized must validate first.
 - `isBeforeDate(left, right)`
 - `isAfterDate(left, right)`
 - `isSameDate(left, right)`
+- `earlierDate(left, right)`
+- `laterDate(left, right)`
 - `addDays(date, delta)`
+- `addWeeks(date, delta)`
 - `addMonths(month, delta)`
+- `addYears(date, delta)`
 - `differenceInCalendarDays(left, right)`
 - `getMonthLength(month)`
 - `getToday()`
@@ -159,9 +163,30 @@ values being formatted, sorted, or normalized must validate first.
 - `fromGregorianDate(date)`
 - `toIsoDate(date)`
 - `buildCalendarDays(visibleMonth, selectedDate, isDateDisabled, weekStartsOn)`
+- `isDateWithinBounds(date, bounds)`
 - `isDateOutsideBounds(date, bounds)`
+- `clampDate(date, bounds)`
 - `isDateUnavailable(date, options)`
 - `createDateDisabledMatcher(options)`
+
+### Arithmetic And Bounds Behavior
+
+- `addWeeks` moves by exactly `delta * 7` calendar days. Deltas must be safe
+  integers, and movement outside the supported full-year range throws
+  `RangeError`.
+- `addYears` keeps the original month and day when that date exists in the
+  target year. If it does not, the day clamps to the target month's final real
+  day. The same rule applies to positive and negative movement; for example,
+  moving from Esfand 30 into a non-leap year produces Esfand 29.
+- `earlierDate` and `laterDate` return one of their input values. Equal dates
+  return the left input, providing deterministic tie behavior.
+- `isDateWithinBounds` treats `minDate` and `maxDate` as inclusive.
+  `isDateOutsideBounds` is its logical complement.
+- `clampDate` returns the minimum for earlier values, the maximum for later
+  values, and the original input when it is already inside the inclusive
+  interval. One-sided and empty bounds are supported.
+- Invalid dates, unsafe deltas, movement outside supported years, invalid
+  bounds, and reversed min/max intervals throw `RangeError`.
 
 ## Selection Core
 

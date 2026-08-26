@@ -26,6 +26,7 @@ three selection modes: https://moroshani.github.io/solar-hijri-calendar-componen
 - Controlled multiple-date selection.
 - Direct Solar Hijri month and year navigation through the controlled `month` API.
 - Explicit runtime validation for dates, months, ranges, and supported years.
+- Day, week, month, and clamping year arithmetic with inclusive bound helpers.
 - Disabled-date support.
 - Custom day rendering and day class hooks.
 - Keyboard-accessible buttons.

@@ -1,4 +1,4 @@
-import { compareDates, isAfterDate, isBeforeDate } from "./calendarMath.js";
+import { compareDates, earlierDate, isAfterDate, isBeforeDate, laterDate } from "./calendarMath.js";
 import type { SolarHijriDate } from "./types.js";
 import { assertValidSolarHijriDate } from "./validation.js";
 
@@ -19,12 +19,23 @@ const assertValidBounds = (bounds: DateBounds) => {
   }
 };
 
-export const isDateOutsideBounds = (date: SolarHijriDate, bounds: DateBounds = {}) => {
+export const isDateWithinBounds = (date: SolarHijriDate, bounds: DateBounds = {}) => {
   assertValidSolarHijriDate(date);
   assertValidBounds(bounds);
-  if (bounds.minDate && isBeforeDate(date, bounds.minDate)) return true;
-  if (bounds.maxDate && isAfterDate(date, bounds.maxDate)) return true;
-  return false;
+  if (bounds.minDate && isBeforeDate(date, bounds.minDate)) return false;
+  if (bounds.maxDate && isAfterDate(date, bounds.maxDate)) return false;
+  return true;
+};
+
+export const isDateOutsideBounds = (date: SolarHijriDate, bounds: DateBounds = {}) => {
+  return !isDateWithinBounds(date, bounds);
+};
+
+export const clampDate = (date: SolarHijriDate, bounds: DateBounds = {}): SolarHijriDate => {
+  assertValidSolarHijriDate(date);
+  assertValidBounds(bounds);
+  const notBeforeMin = bounds.minDate ? laterDate(date, bounds.minDate) : date;
+  return bounds.maxDate ? earlierDate(notBeforeMin, bounds.maxDate) : notBeforeMin;
 };
 
 export const isDateUnavailable = (date: SolarHijriDate, options: DateConstraintOptions = {}) => {
